@@ -1,2 +1,2 @@
 # jmuking.dev
-My personal website :D
+My personal website 😎
