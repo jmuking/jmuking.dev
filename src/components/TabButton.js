@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { colors } from "../configs/default";
+import { colors, font } from "../configs/default";
 
-function TabButton({ active, text, style, onClick }) {
+function TabButton({ active, text, onClick, isMobile }) {
   const [hovering, setHovering] = useState(false);
 
   return (
     <button
-      onClick={onClick}
+      onClick={() => {
+        try {
+          navigator.vibrate(10);
+        } catch {
+          /*do nothing*/
+        }
+        onClick();
+      }}
       onMouseEnter={() => {
         setHovering(true);
       }}
@@ -14,24 +21,27 @@ function TabButton({ active, text, style, onClick }) {
         setHovering(false);
       }}
       style={{
-        ...{
-          background: active
-            ? colors.primary
-            : hovering
-            ? colors.other2
-            : colors.dark,
-          color: active ? colors.dark : colors.light,
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          textAlign: "center",
-          border: "0px",
-          height: active ? "100%" : "80%",
-          fontWeight: active ? "bold" : "normal",
-          fontSize: active ? "18px" : "14px",
-          cursor: active ? "auto" : "pointer",
-          boxShadow: active ? `5px 5px 5px 0 ${colors.dark}` : "none",
-        },
-        ...style,
+        background: active
+          ? colors.primary
+          : hovering
+          ? colors.other2
+          : colors.dark,
+        color: active ? colors.dark : colors.light,
+        paddingLeft: "2rem",
+        paddingRight: "2rem",
+        textAlign: "center",
+        border: "0px",
+        height: active && !isMobile ? "100%" : !isMobile ? "80%" : "4rem",
+        fontWeight: active ? "bold" : "normal",
+        fontSize: active ? "18px" : "14px",
+        cursor: active ? "auto" : "pointer",
+        borderTop: isMobile ? `2px solid ${colors.dark}` : "0",
+        fontFamily: font,
+        boxShadow: active
+          ? !isMobile
+            ? `3px 3px 2px 0 ${colors.dark}`
+            : `0px 3px 2px 0 ${colors.dark}`
+          : "none",
       }}
     >
       {text}

@@ -1,9 +1,18 @@
+html,
 body,
 #root {
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: center;
+}
+
+body {
+  background-color: #e6e1cf;
+  font-family: "JetBrains Mono";
 }
