@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { colors, font } from "../configs/default";
 import emailjs, { init } from "@emailjs/browser";
 import { emailjsSettings } from "../configs/default";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { render } from "@testing-library/react";
 
@@ -50,31 +49,23 @@ const ContactSubmit = styled.input`
   font-family: ${font};
 `;
 
-function useSent() {
-  const { search } = useLocation();
-
-  const query = new URLSearchParams(search);
-  const userName = query.get("user_name");
-  const userEmail = query.get("user_email");
-  const message = query.get("message");
-  return userName && userEmail && message;
-}
-
 function Contact() {
   const form = useRef(null);
-  const sent = useSent();
 
   const [validEmail, setValidEmail] = useState(false);
   const [validName, setValidName] = useState(false);
   const [validMessage, setValidMessage] = useState(false);
   const [submitHovering, setSubmitHovering] = useState(false);
   const [validSubmit, setValidSubmit] = useState(false);
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     setValidSubmit(validName && validEmail && validMessage);
   }, [validName, validEmail, validMessage]);
 
   const sendEmail = (e) => {
+    e.preventDefault();
+
     emailjs
       .sendForm(
         emailjsSettings.serviceId,
@@ -84,10 +75,10 @@ function Contact() {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          setSent(true);
         },
         (error) => {
-          console.error(error.text);
+          console.error(error);
         }
       );
   };
@@ -166,7 +157,6 @@ function Contact() {
             disabled={!validSubmit}
             value="Send"
             onMouseEnter={() => {
-              console.log("waaa");
               setSubmitHovering(true);
             }}
             onMouseLeave={() => {
