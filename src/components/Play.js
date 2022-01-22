@@ -33,6 +33,7 @@ function Play() {
         style={{ display: loading ? "" : "none" }}
       ></img>
       <iframe
+        style={{ display: loading ? "none" : "" }}
         title="Play a game"
         ref={itch}
         frameborder="0"
