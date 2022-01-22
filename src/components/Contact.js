@@ -27,6 +27,8 @@ const ContactInput = styled.input`
   font-size: 18px;
   padding: 0.5rem;
   font-family: ${font};
+  border-width: 2px;
+  border-style: solid;
 `;
 
 const ContactTextArea = styled.textarea`
@@ -37,6 +39,7 @@ const ContactTextArea = styled.textarea`
   line-height: 1.6rem;
   padding: 0.5rem;
   font-family: ${font};
+  border-width: 2px;
 `;
 
 const ContactSubmit = styled.input`
@@ -185,6 +188,9 @@ function Contact() {
               }
             }}
           ></ContactSubmit>
+          <p style={{ color: colors.invalid, textAlign: "left" }}>
+            * = required
+          </p>
         </ContactForm>
       );
   };
