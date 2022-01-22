@@ -3,19 +3,19 @@ import { games } from "../configs/default";
 import GameFrame from "./GameFrame";
 import Loading from "./Loading";
 
-function Play() {
-  const devilsTreaty = useRef(null);
-  const polarPuttPutt = useRef(null);
+import jeffMonke from "../resources/jeff-monke.gif";
+import samMonke from "../resources/sam-monke.gif";
+import monke from "../resources/monke-nomonkey.png";
+import styled from "styled-components";
 
+const MonkeImg = styled.img`
+  min-width: 1rem;
+  min-height: 1rem;
+`;
+
+function Play() {
   const [loaded, setLoaded] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const addLoaded = (evt) => {
-    let newLoaded = loaded;
-    newLoaded.push(evt.target.title);
-    console.log(newLoaded);
-    setLoaded(newLoaded);
-  };
 
   return (
     <div
@@ -29,6 +29,7 @@ function Play() {
       }}
     >
       <Loading show={loading}></Loading>
+
       {games.map((game, index) => {
         return (
           <GameFrame
@@ -45,6 +46,17 @@ function Play() {
           ></GameFrame>
         );
       })}
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        <MonkeImg src={jeffMonke} alt="Jeff" height="100rem"></MonkeImg>
+        <MonkeImg src={monke} alt="monke" height="200rem"></MonkeImg>
+        <MonkeImg src={samMonke} alt="Sam" height="100rem"></MonkeImg>
+      </div>
     </div>
   );
 }
