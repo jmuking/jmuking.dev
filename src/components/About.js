@@ -32,7 +32,11 @@ function About() {
         participate in game jams, and have made a few fun little games (with my
         friend Sam) that you can play in the "play" section of this site. When
         I'm making games, I love to keep improving on my pixel art. See some of
-        my art below!
+        my art{" "}
+        <a href="/play" style={{ color: colors.secondary }}>
+          here
+        </a>
+        !
       </p>
       <Gallery photos={photos}></Gallery>
     </div>

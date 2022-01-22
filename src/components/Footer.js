@@ -10,6 +10,8 @@ const spacingStyle = {
   textAlign: "center",
 };
 
+const aFooterStyle = { ...spacingStyle, ...{ color: colors.tertiary } };
+
 const FooterColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,10 +30,10 @@ function Footer() {
       }}
     >
       <FooterColumn>
-        <a href={resumePdf} style={spacingStyle}>
+        <a href={resumePdf} style={aFooterStyle}>
           {strings.resume}
         </a>
-        <a href={`mailto:${links.email}`} style={spacingStyle}>
+        <a href={`mailto:${links.email}`} style={aFooterStyle}>
           {strings.email}
         </a>
       </FooterColumn>
@@ -41,10 +43,10 @@ function Footer() {
       </FooterColumn>
 
       <FooterColumn>
-        <a href={links.github} style={spacingStyle}>
+        <a href={links.github} style={aFooterStyle}>
           {strings.github}
         </a>
-        <a href={links.itch} style={spacingStyle}>
+        <a href={links.itch} style={aFooterStyle}>
           {strings.itch}
         </a>
       </FooterColumn>
