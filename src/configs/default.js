@@ -16,6 +16,19 @@ export const photos = [
   { src: gamePng, width: 1.8, height: 1 },
 ];
 
+export const games = [
+  {
+    title: "Polar Putt-Putt",
+    src: "https://itch.io/embed/939599",
+    href: "https://monke-games.itch.io/polar-putt-putt",
+  },
+  {
+    title: "The Devil's Treaty",
+    src: "https://itch.io/embed/1258297",
+    href: "https://monke-games.itch.io/the-devils-treaty",
+  },
+];
+
 export const strings = {
   title: "Jeff King",
   resume: "resume",

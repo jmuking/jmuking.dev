@@ -10,7 +10,7 @@ function Home() {
         alignItems: "center",
       }}
     >
-      <h1>Sr. Software Engineer</h1>
+      <h2>Sr. Software Engineer</h2>
       <img
         src={meJpg}
         alt="me"

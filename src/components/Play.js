@@ -1,18 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import { games } from "../configs/default";
+import GameFrame from "./GameFrame";
 import Loading from "./Loading";
 
 function Play() {
-  const itch = useRef(null);
+  const devilsTreaty = useRef(null);
+  const polarPuttPutt = useRef(null);
 
+  const [loaded, setLoaded] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (itch.current) {
-      itch.current.addEventListener("load", () => {
-        setLoading(false);
-      });
-    }
-  }, [itch]);
+  const addLoaded = (evt) => {
+    let newLoaded = loaded;
+    newLoaded.push(evt.target.title);
+    console.log(newLoaded);
+    setLoaded(newLoaded);
+  };
 
   return (
     <div
@@ -26,18 +29,22 @@ function Play() {
       }}
     >
       <Loading show={loading}></Loading>
-      <iframe
-        title="Play a game"
-        ref={itch}
-        frameBorder="0"
-        src="https://itch.io/embed/1258297?bg_color=33332f&amp;fg_color=e6e1cf&amp;link_color=41658A&amp;border_color=33332f"
-        width={loading ? "0" : "100%"}
-        height="167"
-      >
-        <a href="https://monke-games.itch.io/the-devils-treaty">
-          The Devil's Treaty by Monke Games
-        </a>
-      </iframe>
+      {games.map((game, index) => {
+        return (
+          <GameFrame
+            key={index}
+            src={game.src}
+            title={game.title}
+            href={game.href}
+            onLoaded={(evt) => {
+              let newLoaded = loaded;
+              newLoaded.push(evt.target.title);
+              setLoaded(newLoaded);
+              if (newLoaded.length >= games.length) setLoading(false);
+            }}
+          ></GameFrame>
+        );
+      })}
     </div>
   );
 }
