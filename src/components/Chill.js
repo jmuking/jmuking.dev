@@ -37,7 +37,7 @@ function Chill() {
         ref={spotify}
         title="Chill out to tunes"
         style={{ flexGrow: 1, display: loading ? "none" : "" }}
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1EUMDoJuT8yJsl?utm_source=generator&theme=0"
+        src="https://open.spotify.com/embed/playlist/0FtamvDjvYIDFPvxoYcrPa?utm_source=generator&theme=0"
         width="100%"
         height="100%"
         frameBorder="0"
