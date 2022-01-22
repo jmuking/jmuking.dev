@@ -32,7 +32,7 @@ function GameFrame({ title, onLoaded, src, href }) {
         ""
       )}&border_color=${colors.dark.replace("#", "")}`}
       width={loaded ? "100%" : "0"}
-      height="167"
+      height={loaded ? "167" : "0"}
     >
       <a href={href}>{title}</a>
     </iframe>

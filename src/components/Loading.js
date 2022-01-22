@@ -7,7 +7,11 @@ function Loading({ show }) {
       alt="loading"
       width="100px"
       height="100px"
-      style={{ display: show ? "" : "none" }}
+      style={{
+        display: show ? "" : "none",
+        justifySelf: "center",
+        alignSelf: "center",
+      }}
     ></img>
   );
 }

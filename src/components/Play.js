@@ -29,7 +29,6 @@ function Play() {
       }}
     >
       <Loading show={loading}></Loading>
-
       {games.map((game, index) => {
         return (
           <GameFrame

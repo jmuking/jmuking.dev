@@ -29,8 +29,10 @@ function About() {
     >
       <p style={{ color: colors.light, marginTop: "0" }}>
         In my free time I love to bike, play games, and yell at my cats. I also
-        participate in game jams, and have made a few fun little games that you
-        can play in the "play" section of this site!
+        participate in game jams, and have made a few fun little games (with my
+        friend Sam) that you can play in the "play" section of this site. When
+        I'm making games, I love to keep improving on my pixel art. See some of
+        my art below!
       </p>
       <Gallery photos={photos}></Gallery>
     </div>
