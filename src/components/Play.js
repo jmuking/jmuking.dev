@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import loadingGif from "../resources/loading.gif";
+import Loading from "./Loading";
 
 function Play() {
   const itch = useRef(null);
@@ -25,13 +25,7 @@ function Play() {
         height: "100%",
       }}
     >
-      <img
-        src={loadingGif}
-        alt="loading"
-        width="100px"
-        height="100px"
-        style={{ display: loading ? "" : "none" }}
-      ></img>
+      <Loading show={loading}></Loading>
       <iframe
         title="Play a game"
         ref={itch}

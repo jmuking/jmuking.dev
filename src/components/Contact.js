@@ -3,7 +3,7 @@ import { colors, font } from "../configs/default";
 import emailjs, { init } from "@emailjs/browser";
 import { emailjsSettings } from "../configs/default";
 import styled from "styled-components";
-import { render } from "@testing-library/react";
+import Loading from "./Loading";
 
 init(emailjsSettings.userId);
 
@@ -58,12 +58,15 @@ function Contact() {
   const [submitHovering, setSubmitHovering] = useState(false);
   const [validSubmit, setValidSubmit] = useState(false);
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setValidSubmit(validName && validEmail && validMessage);
   }, [validName, validEmail, validMessage]);
 
   const sendEmail = (e) => {
+    setLoading(true);
+
     e.preventDefault();
 
     emailjs
@@ -76,9 +79,11 @@ function Contact() {
       .then(
         (result) => {
           setSent(true);
+          setLoading(false);
         },
         (error) => {
           console.error(error);
+          setLoading(false);
         }
       );
   };
@@ -100,6 +105,7 @@ function Contact() {
           Thank you for the email! I will get back to you shortly &#128512;.
         </h3>
       );
+    else if (loading) return <Loading show={loading}></Loading>;
     else
       return (
         <ContactForm ref={form} onSubmit={sendEmail}>

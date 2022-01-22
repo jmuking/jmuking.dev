@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import loadingGif from "../resources/loading.gif";
+import Loading from "./Loading";
 
 function Chill() {
   const spotify = useRef(null);
@@ -26,13 +26,7 @@ function Chill() {
         height: "100%",
       }}
     >
-      <img
-        src={loadingGif}
-        alt="loading"
-        width="100px"
-        height="100px"
-        style={{ display: loading ? "" : "none" }}
-      ></img>
+      <Loading show={loading}></Loading>
       <iframe
         ref={spotify}
         title="Chill out to tunes"
