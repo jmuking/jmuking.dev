@@ -17,10 +17,9 @@ const Title = styled.h1`
 const HeaderBackground = styled.div`
   color: ${colors.dark};
   background-color: ${colors.primary};
-  padding-left: 2rem;
-  padding-right: 1rem;
+  padding: 2rem;
   padding-top: 1rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
