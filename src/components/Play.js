@@ -33,12 +33,11 @@ function Play() {
         style={{ display: loading ? "" : "none" }}
       ></img>
       <iframe
-        style={{ display: loading ? "none" : "" }}
         title="Play a game"
         ref={itch}
-        frameborder="0"
+        frameBorder="0"
         src="https://itch.io/embed/1258297?bg_color=33332f&amp;fg_color=e6e1cf&amp;link_color=41658A&amp;border_color=33332f"
-        width="100%"
+        width={loading ? "0" : "100%"}
         height="167"
       >
         <a href="https://monke-games.itch.io/the-devils-treaty">
