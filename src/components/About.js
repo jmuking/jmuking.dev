@@ -27,7 +27,7 @@ function About() {
         background: colors.dark,
       }}
     >
-      <p style={{ color: colors.light, marginTop: "0" }}>
+      <p style={{ color: colors.light, marginTop: "0", lineHeight: "1.6" }}>
         In my free time I love to bike, play games, and yell at my cats. I also
         participate in game jams, and have made a few fun little games (with my
         friend Sam) that you can play in the "play" section of this site. When
