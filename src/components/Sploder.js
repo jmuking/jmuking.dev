@@ -143,7 +143,8 @@ function Sploder() {
   }, [splosionWave]);
 
   const triggerExplosion = (x, y) => {
-    setSplosionWave([{ x, y, dir: "origin" }]);
+    setLastSplosionWave([]);
+    setSplosionWave([...splosionWave, ...[{ x, y, dir: "origin" }]]);
   };
 
   return (

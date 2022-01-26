@@ -65,7 +65,3 @@ export const emailjsSettings = {
   templateId: "template_l8ni544",
   userId: "user_s58f0r1kqLue155XPVicV",
 };
-
-export const sploder = {
-  colorMappings: ["red", "blue", "black"],
-};
