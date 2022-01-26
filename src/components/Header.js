@@ -25,6 +25,7 @@ const HeaderBackground = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 99;
   box-shadow: 0 3px 3px 2px ${colors.dark};
 `;
 

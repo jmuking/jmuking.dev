@@ -82,6 +82,8 @@ function Sploder() {
         x < sploderRow.length - 1
       ) {
         newSplosionWave.push({ x: x + 1, y: y + 1, dir: DOWN_RIGHT });
+        newSplosionWave.push({ x, y: y + 1, dir: DOWN });
+        newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
       }
 
       // MOVE DOWN-LEFT
@@ -91,6 +93,8 @@ function Sploder() {
         x > 0
       ) {
         newSplosionWave.push({ x: x - 1, y: y + 1, dir: DOWN_LEFT });
+        newSplosionWave.push({ x, y: y + 1, dir: DOWN });
+        newSplosionWave.push({ x: x - 1, y, dir: LEFT });
       }
 
       // MOVE UP-RIGHT
@@ -100,11 +104,15 @@ function Sploder() {
         x < sploderRow.length - 1
       ) {
         newSplosionWave.push({ x: x + 1, y: y - 1, dir: UP_RIGHT });
+        newSplosionWave.push({ x, y: y - 1, dir: UP });
+        newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
       }
 
       // MOVE UP-LEFT
       if ([ORIGIN, UP_LEFT].includes(dir) && y > 0 && x > 0) {
         newSplosionWave.push({ x: x - 1, y: y - 1, dir: UP_LEFT });
+        newSplosionWave.push({ x, y: y - 1, dir: UP });
+        newSplosionWave.push({ x: x - 1, y, dir: LEFT });
       }
 
       return newSplosionWave;
@@ -143,8 +151,7 @@ function Sploder() {
   }, [splosionWave]);
 
   const triggerExplosion = (x, y) => {
-    setLastSplosionWave([]);
-    setSplosionWave([...splosionWave, ...[{ x, y, dir: "origin" }]]);
+    setSplosionWave([{ x, y, dir: "origin" }]);
   };
 
   return (
