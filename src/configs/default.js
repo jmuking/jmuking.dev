@@ -42,7 +42,8 @@ export const strings = {
 export const links = {
   github: "https://github.com/jmuking",
   itch: "https://monke-games.itch.io",
-  number: "5734240859",
+  gitApi:
+    "https://api.github.com/repos/jmuking/jmuking.dev/contents/src/components",
   email: "jeff@jmuking.dev",
 };
 
