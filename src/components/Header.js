@@ -48,6 +48,7 @@ const headerTabs = [
   ["contact", "/contact"],
   ["chill", "/chill"],
   ["play", "/play"],
+  ["sploder", "/sploder"],
 ];
 
 function Header() {

@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Chill from "./components/Chill";
 import Play from "./components/Play";
+import Sploder from "./components/Sploder";
 import { Routes, Route } from "react-router-dom";
 import { colors } from "./configs/default";
 import styled from "styled-components";
@@ -45,6 +46,7 @@ function App() {
             <Route path="/contact" element={<Contact></Contact>}></Route>
             <Route path="/chill" element={<Chill></Chill>}></Route>
             <Route path="/play" element={<Play></Play>}></Route>
+            <Route path="/sploder" element={<Sploder></Sploder>}></Route>
           </Routes>
         </ContentContainer>
         <Footer></Footer>
