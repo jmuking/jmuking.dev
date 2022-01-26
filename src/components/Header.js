@@ -6,6 +6,8 @@ import TabButton from "./TabButton";
 
 import menuPng from "../resources/menu.png";
 import menuOpenPng from "../resources/menu-open.png";
+import inspectPng from "../resources/inspect.png";
+import inspectOpenPng from "../resources/inspect-open.png";
 
 const Title = styled.h1`
   color: ${colors.dark};
@@ -51,7 +53,7 @@ const headerTabs = [
   ["sploder (WIP)", "/sploder"],
 ];
 
-function Header() {
+function Header({ onToggleCodeSpy }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
@@ -59,6 +61,7 @@ function Header() {
 
   //600,4
   const [menuOpen, setMenuOpen] = useState(false);
+  const [inspectOpen, setInspectOpen] = useState(false);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -137,7 +140,34 @@ function Header() {
 
   const renderTitle = () => {
     if (isTinyMobile) return <Title>{strings.title}</Title>;
-    else return <Title>{strings.title} &#127918; &#128039; &#128692;</Title>;
+    else if (isMobile)
+      return <Title>{strings.title} &#127918; &#128039; &#128692;</Title>;
+    else
+      return (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Title>{strings.title} &#127918; &#128039; &#128692;</Title>
+          <img
+            src={inspectOpen ? inspectOpenPng : inspectPng}
+            alt="inspect"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              try {
+                navigator.vibrate(10);
+              } catch {
+                /*do nothing*/
+              }
+              setInspectOpen(!inspectOpen);
+              onToggleCodeSpy();
+            }}
+          ></img>
+        </div>
+      );
   };
 
   return (

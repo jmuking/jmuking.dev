@@ -57,22 +57,22 @@ function Sploder() {
 
       // MOVE DOWN
       if ([ORIGIN, DOWN].includes(dir) && y < sploderBoard.length - 1) {
-        newSplosionWave.push({ x, y: y + 1, dir: "down" });
+        newSplosionWave.push({ x, y: y + 1, dir: DOWN });
       }
 
       // MOVE UP
       if ([ORIGIN, UP].includes(dir) && y > 0) {
-        newSplosionWave.push({ x, y: y - 1, dir: "up" });
+        newSplosionWave.push({ x, y: y - 1, dir: UP });
       }
 
       // MOVE RIGHT
       if ([ORIGIN, RIGHT].includes(dir) && x < sploderRow.length - 1) {
-        newSplosionWave.push({ x: x + 1, y, dir: "right" });
+        newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
       }
 
       // MOVE LEFT
       if ([ORIGIN, LEFT].includes(dir) && x > 0) {
-        newSplosionWave.push({ x: x - 1, y, dir: "left" });
+        newSplosionWave.push({ x: x - 1, y, dir: LEFT });
       }
 
       // MOVE DOWN-RIGHT
@@ -81,7 +81,7 @@ function Sploder() {
         y < sploderBoard.length - 1 &&
         x < sploderRow.length - 1
       ) {
-        newSplosionWave.push({ x: x + 1, y: y + 1, dir: "downright" });
+        newSplosionWave.push({ x: x + 1, y: y + 1, dir: DOWN_RIGHT });
       }
 
       // MOVE DOWN-LEFT
@@ -90,7 +90,7 @@ function Sploder() {
         y < sploderBoard.length - 1 &&
         x > 0
       ) {
-        newSplosionWave.push({ x: x - 1, y: y + 1, dir: "downleft" });
+        newSplosionWave.push({ x: x - 1, y: y + 1, dir: DOWN_LEFT });
       }
 
       // MOVE UP-RIGHT
@@ -99,12 +99,12 @@ function Sploder() {
         y > 0 &&
         x < sploderRow.length - 1
       ) {
-        newSplosionWave.push({ x: x + 1, y: y - 1, dir: "upright" });
+        newSplosionWave.push({ x: x + 1, y: y - 1, dir: UP_RIGHT });
       }
 
       // MOVE UP-LEFT
       if ([ORIGIN, UP_LEFT].includes(dir) && y > 0 && x > 0) {
-        newSplosionWave.push({ x: x - 1, y: y - 1, dir: "upleft" });
+        newSplosionWave.push({ x: x - 1, y: y - 1, dir: UP_LEFT });
       }
 
       return newSplosionWave;
