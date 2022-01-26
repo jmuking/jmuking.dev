@@ -27,7 +27,6 @@ const AppContainer = styled.div`
 
 const ContentContainer = styled.div`
   width: 100%;
-  height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   max-width: 50rem;
@@ -37,10 +36,10 @@ const ContentContainer = styled.div`
 
 const ParentContentContainer = styled.div`
   width: 100%;
-  height: -webkit-fill-available;
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
+  flex: 1;
 `;
 
 function App() {
