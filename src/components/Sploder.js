@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 
 const SPLODER_MAP = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 2, 2, 2, 0],
+  [0, 0, 0, 0, 0, 0, 2, 0, 2, 0],
+  [0, 0, 0, 0, 0, 0, 2, 0, 2, 0],
+  [0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+  [0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+  [0, 2, 0, 2, 0, 0, 0, 0, 2, 0],
+  [0, 2, 0, 2, 0, 0, 0, 2, 0, 0],
+  [0, 0, 0, 2, 0, 0, 2, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
@@ -36,7 +36,6 @@ function Sploder() {
   const [splosionWave, setSplosionWave] = useState([]);
   const [lastSplosionWave, setLastSplosionWave] = useState([]);
   const [gameClock, setGameClock] = useState(0);
-  const [lastSplosionPosition, setLastSplosionPosition] = useState(null);
 
   useEffect(() => {
     let x = gameClock;
@@ -56,22 +55,34 @@ function Sploder() {
       let newSplosionWave = [];
 
       // MOVE DOWN
-      if ([ORIGIN, DOWN].includes(dir) && y < sploderBoard.length - 1) {
+      if (
+        [ORIGIN, DOWN].includes(dir) &&
+        y < sploderBoard.length - 1 &&
+        sploderBoard[y + 1][x] === 0
+      ) {
         newSplosionWave.push({ x, y: y + 1, dir: DOWN });
       }
 
       // MOVE UP
-      if ([ORIGIN, UP].includes(dir) && y > 0) {
+      if ([ORIGIN, UP].includes(dir) && y > 0 && sploderBoard[y - 1][x] === 0) {
         newSplosionWave.push({ x, y: y - 1, dir: UP });
       }
 
       // MOVE RIGHT
-      if ([ORIGIN, RIGHT].includes(dir) && x < sploderRow.length - 1) {
+      if (
+        [ORIGIN, RIGHT].includes(dir) &&
+        x < sploderRow.length - 1 &&
+        sploderBoard[y][x + 1] === 0
+      ) {
         newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
       }
 
       // MOVE LEFT
-      if ([ORIGIN, LEFT].includes(dir) && x > 0) {
+      if (
+        [ORIGIN, LEFT].includes(dir) &&
+        x > 0 &&
+        sploderBoard[y][x - 1] === 0
+      ) {
         newSplosionWave.push({ x: x - 1, y, dir: LEFT });
       }
 
@@ -81,9 +92,14 @@ function Sploder() {
         y < sploderBoard.length - 1 &&
         x < sploderRow.length - 1
       ) {
-        newSplosionWave.push({ x: x + 1, y: y + 1, dir: DOWN_RIGHT });
-        newSplosionWave.push({ x, y: y + 1, dir: DOWN });
-        newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
+        if (sploderBoard[y + 1][x + 1] === 0)
+          newSplosionWave.push({ x: x + 1, y: y + 1, dir: DOWN_RIGHT });
+
+        if (sploderBoard[y + 1][x] === 0)
+          newSplosionWave.push({ x, y: y + 1, dir: DOWN });
+
+        if (sploderBoard[y][x + 1] === 0)
+          newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
       }
 
       // MOVE DOWN-LEFT
@@ -92,9 +108,14 @@ function Sploder() {
         y < sploderBoard.length - 1 &&
         x > 0
       ) {
-        newSplosionWave.push({ x: x - 1, y: y + 1, dir: DOWN_LEFT });
-        newSplosionWave.push({ x, y: y + 1, dir: DOWN });
-        newSplosionWave.push({ x: x - 1, y, dir: LEFT });
+        if (sploderBoard[y + 1][x - 1] === 0)
+          newSplosionWave.push({ x: x - 1, y: y + 1, dir: DOWN_LEFT });
+
+        if (sploderBoard[y + 1][x] === 0)
+          newSplosionWave.push({ x, y: y + 1, dir: DOWN });
+
+        if (sploderBoard[y][x - 1] === 0)
+          newSplosionWave.push({ x: x - 1, y, dir: LEFT });
       }
 
       // MOVE UP-RIGHT
@@ -103,16 +124,26 @@ function Sploder() {
         y > 0 &&
         x < sploderRow.length - 1
       ) {
-        newSplosionWave.push({ x: x + 1, y: y - 1, dir: UP_RIGHT });
-        newSplosionWave.push({ x, y: y - 1, dir: UP });
-        newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
+        if (sploderBoard[y - 1][x + 1] === 0)
+          newSplosionWave.push({ x: x + 1, y: y - 1, dir: UP_RIGHT });
+
+        if (sploderBoard[y - 1][x] === 0)
+          newSplosionWave.push({ x, y: y - 1, dir: UP });
+
+        if (sploderBoard[y][x + 1] === 0)
+          newSplosionWave.push({ x: x + 1, y, dir: RIGHT });
       }
 
       // MOVE UP-LEFT
       if ([ORIGIN, UP_LEFT].includes(dir) && y > 0 && x > 0) {
-        newSplosionWave.push({ x: x - 1, y: y - 1, dir: UP_LEFT });
-        newSplosionWave.push({ x, y: y - 1, dir: UP });
-        newSplosionWave.push({ x: x - 1, y, dir: LEFT });
+        if (sploderBoard[y - 1][x - 1] === 0)
+          newSplosionWave.push({ x: x - 1, y: y - 1, dir: UP_LEFT });
+
+        if (sploderBoard[y - 1][x] === 0)
+          newSplosionWave.push({ x, y: y - 1, dir: UP });
+
+        if (sploderBoard[y][x - 1] === 0)
+          newSplosionWave.push({ x: x - 1, y, dir: LEFT });
       }
 
       return newSplosionWave;
@@ -136,13 +167,15 @@ function Sploder() {
 
     for (const i in splosionWave) {
       const newWave = splosionWave[i];
-      newSploderBoard[newWave.y][newWave.x] = 1;
+      if (newSploderBoard[newWave.y][newWave.x] === 0)
+        newSploderBoard[newWave.y][newWave.x] = 1;
     }
 
     if (lastSplosionWave) {
       for (const i in lastSplosionWave) {
         const removeWave = lastSplosionWave[i];
-        newSploderBoard[removeWave.y][removeWave.x] = 0;
+        if (newSploderBoard[removeWave.y][removeWave.x] === 1)
+          newSploderBoard[removeWave.y][removeWave.x] = 0;
       }
     }
 

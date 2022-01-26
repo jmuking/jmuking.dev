@@ -2,22 +2,6 @@ import styled from "styled-components";
 import Gallery from "react-photo-gallery";
 import { colors, photos } from "../configs/default";
 
-const HalfImg = styled.img`
-  max-width: calc(50% - 2rem);
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  margin: 1rem;
-`;
-
-const WholeImg = styled.img`
-  max-width: calc(100% - 2rem);
-  max-height: calc(50% - 2rem);
-  width: auto;
-  height: auto;
-  margin: 1rem;
-`;
-
 function About() {
   return (
     <div
