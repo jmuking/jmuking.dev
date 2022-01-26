@@ -25,7 +25,9 @@ const DOWN_LEFT = "downleft";
 const UP_RIGHT = "upright";
 const UP_LEFT = "upleft";
 
-const SploderTable = styled.table``;
+const SploderTable = styled.table`
+  height: 100%;
+`;
 
 const SploderRow = styled.tr``;
 
@@ -145,7 +147,14 @@ function Sploder() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        margin: "2rem",
+      }}
+    >
       <SploderTable>
         <tbody>
           {sploderBoard.map((sploderRow, y) => {
