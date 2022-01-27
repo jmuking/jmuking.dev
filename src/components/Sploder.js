@@ -15,15 +15,15 @@ const SPLODER_MAP = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const ORIGIN = "origin";
-const DOWN = "down";
-const UP = "up";
-const RIGHT = "right";
-const LEFT = "left";
-const DOWN_RIGHT = "downright";
-const DOWN_LEFT = "downleft";
-const UP_RIGHT = "upright";
-const UP_LEFT = "upleft";
+const ORIGIN = 0;
+const DOWN = 1;
+const UP = 2;
+const RIGHT = 3;
+const LEFT = 4;
+const DOWN_RIGHT = 5;
+const DOWN_LEFT = 6;
+const UP_RIGHT = 7;
+const UP_LEFT = 8;
 
 const SploderTable = styled.table`
   height: 100%;
@@ -41,7 +41,7 @@ function Sploder() {
     let x = gameClock;
     setInterval(() => {
       setGameClock(++x);
-    }, 1000);
+    }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -184,7 +184,7 @@ function Sploder() {
   }, [splosionWave]);
 
   const triggerExplosion = (x, y) => {
-    setSplosionWave([{ x, y, dir: "origin" }]);
+    setSplosionWave([{ x, y, dir: ORIGIN }]);
   };
 
   return (
