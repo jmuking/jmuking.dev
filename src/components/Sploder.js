@@ -199,8 +199,8 @@ function Sploder() {
         height: "45rem",
         width: "45rem",
         alignSelf: "center",
-        maxHeight: "calc(100vh - 20rem)",
-        maxWidth: "calc(100vh - 20rem)",
+        maxHeight: "calc(100vh - 60rem)",
+        maxWidth: "calc(100vh - 60rem)",
       }}
     >
       <SploderTable>
