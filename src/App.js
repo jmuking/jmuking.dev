@@ -31,7 +31,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   max-width: 50rem;
   overflow: auto;
-  margin: 2rem;
+  padding: 2rem;
 `;
 
 const ParentContentContainer = styled.div`
