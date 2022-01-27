@@ -1,7 +1,13 @@
 import { colors, sploder } from "../../configs/default";
 import styled from "styled-components";
 
-const COLOR_MAPPINGS = [colors.other2, colors.primary, colors.dark];
+const COLOR_MAPPINGS = [
+  colors.other2,
+  colors.primary,
+  colors.dark,
+  colors.tertiary,
+  colors.secondary,
+];
 
 const SploderCell = styled.td``;
 
