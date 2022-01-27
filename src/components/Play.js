@@ -20,7 +20,6 @@ function Play() {
   return (
     <div
       style={{
-        padding: "2rem",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",

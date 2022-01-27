@@ -4,7 +4,6 @@ function Home() {
   return (
     <div
       style={{
-        padding: "2rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

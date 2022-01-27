@@ -198,7 +198,6 @@ function Contact() {
   return (
     <div
       style={{
-        padding: "2rem",
         textAlign: "center",
       }}
     >

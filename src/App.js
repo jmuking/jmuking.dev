@@ -30,8 +30,8 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 50rem;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: auto;
+  margin: 2rem;
 `;
 
 const ParentContentContainer = styled.div`

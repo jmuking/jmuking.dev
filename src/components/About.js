@@ -6,7 +6,6 @@ function About() {
   return (
     <div
       style={{
-        margin: "2rem",
         padding: "1rem",
         background: colors.dark,
       }}
