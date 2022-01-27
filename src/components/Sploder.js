@@ -71,7 +71,7 @@ function Sploder() {
     let x = gameClock;
     setInterval(() => {
       setGameClock(++x);
-    }, 250);
+    }, 200);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
