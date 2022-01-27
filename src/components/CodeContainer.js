@@ -8,10 +8,10 @@ const CodeContent = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 50rem;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 2rem;
+  flex-grow: 1;
 `;
 
 function CodeContainer() {
