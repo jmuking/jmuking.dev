@@ -212,7 +212,7 @@ function Sploder() {
                       y={y}
                       itemType={sploderItem}
                       onClick={() => {
-                        triggerExplosion(x, y);
+                        if (sploderItem === 0) triggerExplosion(x, y);
                       }}
                     ></SploderItem>
                   );
