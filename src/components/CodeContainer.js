@@ -52,6 +52,7 @@ function CodeContainer() {
           color: colors.light,
           padding: "1rem",
           whiteSpace: "pre",
+          overflowX: "auto",
         }}
       >
         {codeContent}
