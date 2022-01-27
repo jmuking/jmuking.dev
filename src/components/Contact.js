@@ -153,6 +153,7 @@ function Contact() {
             </div>
             <ContactTextArea
               name="message"
+              placeholder="Have you ever heard of my friend Joe?"
               onChange={(evt) => {
                 setValidMessage(evt.target.value);
               }}
