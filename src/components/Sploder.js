@@ -195,8 +195,12 @@ function Sploder() {
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "100%",
         margin: "2rem",
+        height: "50rem",
+        width: "50rem",
+        alignSelf: "center",
+        maxHeight: "calc(100vh - 20rem)",
+        maxWidth: "calc(100vh - 20rem)",
       }}
     >
       <SploderTable>
