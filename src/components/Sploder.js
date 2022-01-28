@@ -276,7 +276,6 @@ function Sploder() {
         height: "50rem",
         width: "100%",
         alignSelf: "center",
-        maxHeight: "calc(100vh - 20rem)",
         maxWidth: "calc(100vh - 20rem)",
       }}
     >
@@ -284,7 +283,8 @@ function Sploder() {
         <TurnText>TURN: {turn}</TurnText>
         <GoalText>
           Land your splosion on the green blocks on turn {turnGoal}. By clicking
-          on a purple block, you can trigger a splosion.
+          on a purple block, you can trigger a splosion. blue blocks will
+          reflect your splosion.
         </GoalText>
         <WinText>
           {win ? (win === WIN ? "You win!" : "You lose! Try again!") : ""}
