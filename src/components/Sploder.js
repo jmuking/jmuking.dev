@@ -191,14 +191,6 @@ function Sploder() {
     return newSplosionWave;
   };
 
-  const resetState = () => {
-    setGoalsMet([]);
-    setSplosionWave([]);
-    setSploderBoard(copyMap());
-    setPlaying(false);
-    setTurn(0);
-  };
-
   const didTheyWin = () => {
     for (const y in sploderBoard) {
       for (const x in sploderBoard[y]) {
@@ -218,7 +210,8 @@ function Sploder() {
   useEffect(() => {
     if (turn === turnGoal + 1) {
       didTheyWin();
-      resetState();
+      setPlaying(false);
+      setTurn(0);
     } else if (playing) {
       let newSplosionWave = [];
       for (const i in splosionWave) {
@@ -264,6 +257,8 @@ function Sploder() {
   }, [splosionWave]);
 
   const triggerSplosion = (x, y) => {
+    setGoalsMet([]);
+    setSploderBoard(copyMap());
     setPlaying(true);
     setSplosionWave([{ x, y, dir: ORIGIN }]);
   };
