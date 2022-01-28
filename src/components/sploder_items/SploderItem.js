@@ -4,7 +4,7 @@ import styled from "styled-components";
 const COLOR_MAPPINGS = [
   colors.other2,
   colors.invalid,
-  colors.dark,
+  colors.light,
   colors.tertiary,
   colors.invalidBg,
   colors.primary,
