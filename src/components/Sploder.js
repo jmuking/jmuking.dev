@@ -79,13 +79,13 @@ const TurnText = styled.div`
 `;
 
 const GoalText = styled.div`
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 const WinText = styled.div`
   margin-top: 1rem;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 function Sploder() {
@@ -216,8 +216,6 @@ function Sploder() {
   };
 
   useEffect(() => {
-    console.log(SPLODER_MAP);
-
     if (turn === turnGoal + 1) {
       didTheyWin();
       resetState();
@@ -284,7 +282,10 @@ function Sploder() {
     >
       <div style={{ marginBottom: "1rem" }}>
         <TurnText>TURN: {turn}</TurnText>
-        <GoalText>Land your splosion on the green blocks on turn {3}</GoalText>
+        <GoalText>
+          Land your splosion on the green blocks on turn {turnGoal}. By clicking
+          on a block, you can trigger a splosion.
+        </GoalText>
         <WinText>
           {win ? (win === WIN ? "You win!" : "You lose! Try again!") : ""}
         </WinText>
