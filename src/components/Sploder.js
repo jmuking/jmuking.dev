@@ -7,20 +7,26 @@ import React, { useEffect, useState } from "react";
 // 1 = SPLODING
 // 2 = WALL
 // 3 = REDIRECTOR
-// 4 = DECAYING
+// 4 = PERSPLODING (will become SPLODING next turn)
+// 5 = GOAL
+// 6 = SCORED!!!
 
 const SPLODER_MAP = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 2, 2, 2, 0],
-  [0, 0, 0, 0, 0, 0, 2, 0, 2, 0],
+  [0, 0, 0, 0, 0, 5, 2, 0, 2, 0],
   [0, 0, 3, 0, 0, 0, 2, 0, 2, 0],
   [0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
-  [0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+  [0, 2, 0, 2, 0, 0, 0, 0, 5, 0],
   [0, 2, 0, 2, 0, 0, 0, 0, 2, 0],
   [0, 2, 0, 2, 0, 0, 0, 2, 3, 0],
   [0, 0, 0, 0, 0, 0, 2, 3, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
+
+const copyMap = () => {
+  return JSON.parse(JSON.stringify(SPLODER_MAP));
+};
 
 // DIRECTION ENUMERATIONS
 const ORIGIN = 0;
@@ -32,6 +38,11 @@ const DOWN_RIGHT = 5;
 const DOWN_LEFT = 6;
 const UP_RIGHT = 7;
 const UP_LEFT = 8;
+
+// WIN STATES
+const NOPLAY = 0;
+const WIN = 1;
+const LOSE = 2;
 
 const oppositeDirection = (dir) => {
   switch (dir) {
@@ -62,18 +73,42 @@ const SploderTable = styled.table`
 
 const SploderRow = styled.tr``;
 
+const TurnText = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+`;
+
+const GoalText = styled.div`
+  font-size: 18px;
+`;
+
+const WinText = styled.div`
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+`;
+
 function Sploder() {
-  const [sploderBoard, setSploderBoard] = useState(SPLODER_MAP);
+  const [sploderBoard, setSploderBoard] = useState(copyMap());
   const [splosionWave, setSplosionWave] = useState([]);
-  const [gameClock, setGameClock] = useState(0);
+  const [gameClock, setGameClock] = useState(null);
+  const [turn, setTurn] = useState(0);
+  const [turnGoal, setTurnGoal] = useState(3);
+  const [playing, setPlaying] = useState(false);
+  const [goalsMet, setGoalsMet] = useState([]);
+  const [win, setWin] = useState(NOPLAY);
 
   useEffect(() => {
-    let x = gameClock;
-    setInterval(() => {
-      setGameClock(++x);
-    }, 200);
+    let x = turn;
+
+    if (gameClock) clearInterval(gameClock);
+    setGameClock(
+      setInterval(() => {
+        if (playing) setTurn(++x);
+      }, 1000)
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [playing]);
 
   const splosionTypeCheck = (lastX, lastY, nsw) => {
     if (
@@ -156,15 +191,50 @@ function Sploder() {
     return newSplosionWave;
   };
 
-  useEffect(() => {
-    let newSplosionWave = [];
-    for (const i in splosionWave) {
-      const newWave = splosionWave[i];
-      newSplosionWave = [...newSplosionWave, ...directWave(newWave)];
+  const resetState = () => {
+    setGoalsMet([]);
+    setSplosionWave([]);
+    setSploderBoard(copyMap());
+    setPlaying(false);
+    setTurn(0);
+  };
+
+  const didTheyWin = () => {
+    for (const y in sploderBoard) {
+      for (const x in sploderBoard[y]) {
+        if (sploderBoard[y][x] === 5) {
+          const goal = `${x},${y}`;
+          if (!goalsMet.includes(goal)) {
+            setWin(LOSE);
+            return;
+          }
+        }
+      }
     }
 
-    setSplosionWave(newSplosionWave);
-  }, [gameClock]);
+    setWin(WIN);
+  };
+
+  useEffect(() => {
+    console.log(SPLODER_MAP);
+
+    if (turn === turnGoal + 1) {
+      didTheyWin();
+      resetState();
+    } else if (playing) {
+      let newSplosionWave = [];
+      for (const i in splosionWave) {
+        const newWave = splosionWave[i];
+        newSplosionWave = [...newSplosionWave, ...directWave(newWave)];
+      }
+
+      setSplosionWave(newSplosionWave);
+      if (newSplosionWave.length === 0) {
+        setPlaying(false);
+        setTurn(0);
+      }
+    }
+  }, [turn]);
 
   useEffect(() => {
     let newSploderBoard = [...sploderBoard];
@@ -176,17 +246,27 @@ function Sploder() {
       }
     }
 
+    let newGoalsMet = [];
     for (const i in splosionWave) {
       const newWave = splosionWave[i];
       if (newWave.redirected || newSploderBoard[newWave.y][newWave.x] === 0) {
         newSploderBoard[newWave.y][newWave.x] = newWave.redirected ? 4 : 1;
+      } else if (
+        newSploderBoard[newWave.y][newWave.x] === 5 &&
+        turn === turnGoal
+      ) {
+        const newGoalMet = `${newWave.x},${newWave.y}`;
+        if (!newGoalsMet.includes(newGoalMet)) newGoalsMet.push(newGoalMet);
+        newSploderBoard[newWave.y][newWave.x] = 6;
       }
     }
 
+    setGoalsMet(newGoalsMet);
     setSploderBoard(newSploderBoard);
   }, [splosionWave]);
 
-  const triggerExplosion = (x, y) => {
+  const triggerSplosion = (x, y) => {
+    setPlaying(true);
     setSplosionWave([{ x, y, dir: ORIGIN }]);
   };
 
@@ -202,6 +282,13 @@ function Sploder() {
         maxWidth: "calc(100vh - 20rem)",
       }}
     >
+      <div style={{ marginBottom: "1rem" }}>
+        <TurnText>TURN: {turn}</TurnText>
+        <GoalText>Land your splosion on the green blocks on turn {3}</GoalText>
+        <WinText>
+          {win ? (win === WIN ? "You win!" : "You lose! Try again!") : ""}
+        </WinText>
+      </div>
       <SploderTable>
         <tbody>
           {sploderBoard.map((sploderRow, y) => {
@@ -210,12 +297,13 @@ function Sploder() {
                 {sploderRow.map((sploderItem, x) => {
                   return (
                     <SploderItem
-                      key={`${x}(${sploderItem})`}
+                      key={`${x},${y}(${sploderItem})`}
                       x={x}
                       y={y}
                       itemType={sploderItem}
                       onClick={() => {
-                        if (sploderItem === 0) triggerExplosion(x, y);
+                        if (sploderItem === 0 && !playing)
+                          triggerSplosion(x, y);
                       }}
                     ></SploderItem>
                   );

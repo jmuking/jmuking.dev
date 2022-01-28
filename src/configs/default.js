@@ -57,6 +57,7 @@ export const colors = {
   light: "#e6e1cf",
   invalid: "#bf2626",
   invalidBg: "#666666",
+  gold: "#c9962e",
 };
 
 export const font = "JetBrains Mono";

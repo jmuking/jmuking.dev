@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 const COLOR_MAPPINGS = [
   colors.other2,
-  colors.primary,
+  colors.invalid,
   colors.dark,
   colors.tertiary,
-  colors.secondary,
+  colors.invalidBg,
+  colors.primary,
+  colors.gold,
 ];
 
 const SploderCell = styled.td``;
