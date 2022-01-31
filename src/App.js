@@ -40,6 +40,7 @@ const ParentContentContainer = styled.div`
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-top: 1rem;
 `;
 
 function App() {
