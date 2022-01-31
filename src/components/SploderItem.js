@@ -1,4 +1,4 @@
-import { colors, sploder } from "../../configs/default";
+import { colors, sploder } from "../configs/default";
 import styled from "styled-components";
 
 const COLOR_MAPPINGS = [

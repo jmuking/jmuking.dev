@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import SploderItem from "./sploder_items/SploderItem";
+import SploderItem from "./SploderItem";
 import React, { useEffect, useState } from "react";
+import { sploderMaps } from "../configs/default";
 
 // ITEM TYPES
 // 0 = BASIC
@@ -9,24 +10,7 @@ import React, { useEffect, useState } from "react";
 // 3 = REDIRECTOR
 // 4 = PERSPLODING (will become SPLODING next turn)
 // 5 = GOAL
-// 6 = SCORED!!!
-
-const SPLODER_MAP = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 2, 2, 2, 0],
-  [0, 0, 0, 0, 0, 5, 2, 0, 2, 0],
-  [0, 0, 3, 0, 0, 0, 2, 0, 2, 0],
-  [0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
-  [0, 2, 0, 2, 0, 0, 0, 0, 5, 0],
-  [0, 2, 0, 2, 0, 0, 0, 0, 2, 0],
-  [0, 2, 0, 2, 0, 0, 0, 2, 3, 0],
-  [0, 0, 0, 0, 0, 0, 2, 3, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
-const copyMap = () => {
-  return JSON.parse(JSON.stringify(SPLODER_MAP));
-};
+// 6 = SCORED!!!;
 
 // DIRECTION ENUMERATIONS
 const ORIGIN = 0;
@@ -40,7 +24,7 @@ const UP_RIGHT = 7;
 const UP_LEFT = 8;
 
 // WIN STATES
-const NOPLAY = 0;
+const NOTHING = 0;
 const WIN = 1;
 const LOSE = 2;
 
@@ -73,30 +57,30 @@ const SploderTable = styled.table`
 
 const SploderRow = styled.tr``;
 
-const TurnText = styled.div`
+const InfoText = styled.div`
   font-weight: bold;
   font-size: 20px;
 `;
 
 const GoalText = styled.div`
-  font-size: 14px;
-`;
-
-const WinText = styled.div`
-  margin-top: 1rem;
-  font-weight: bold;
-  font-size: 20px;
+  font-size: 12px;
+  line-height: 1.6;
 `;
 
 function Sploder() {
-  const [sploderBoard, setSploderBoard] = useState(copyMap());
+  const buildMap = (round) => {
+    return JSON.parse(JSON.stringify(sploderMaps[round]));
+  };
+
+  const [sploderBoard, setSploderBoard] = useState(buildMap(0));
   const [splosionWave, setSplosionWave] = useState([]);
   const [gameClock, setGameClock] = useState(null);
+  const [round, setRound] = useState(0);
   const [turn, setTurn] = useState(0);
   const [turnGoal, setTurnGoal] = useState(3);
   const [playing, setPlaying] = useState(false);
   const [goalsMet, setGoalsMet] = useState([]);
-  const [win, setWin] = useState(NOPLAY);
+  const [win, setWin] = useState(NOTHING);
 
   useEffect(() => {
     let x = turn;
@@ -210,22 +194,36 @@ function Sploder() {
   useEffect(() => {
     if (turn === turnGoal + 1) {
       didTheyWin();
-      setPlaying(false);
-      setTurn(0);
-    } else if (playing) {
+    }
+
+    if (playing) {
       let newSplosionWave = [];
       for (const i in splosionWave) {
         const newWave = splosionWave[i];
         newSplosionWave = [...newSplosionWave, ...directWave(newWave)];
       }
 
-      setSplosionWave(newSplosionWave);
-      if (newSplosionWave.length === 0) {
-        setPlaying(false);
-        setTurn(0);
-      }
+      if (newSplosionWave.length === 0 || turn > 10) {
+        // max turns = 10
+        if (win === WIN) {
+          let nextRound = round + 1;
+          if (nextRound > sploderMaps.length - 1) nextRound = 0;
+          setRound(nextRound);
+        } else resetBoard();
+      } else setSplosionWave(newSplosionWave);
     }
   }, [turn]);
+
+  const resetBoard = () => {
+    setWin(NOTHING);
+    setSploderBoard(buildMap(round));
+    setPlaying(false);
+    setTurn(0);
+  };
+
+  useEffect(() => {
+    resetBoard();
+  }, [round]);
 
   useEffect(() => {
     let newSploderBoard = [...sploderBoard];
@@ -258,7 +256,7 @@ function Sploder() {
 
   const triggerSplosion = (x, y) => {
     setGoalsMet([]);
-    setSploderBoard(copyMap());
+    setSploderBoard(buildMap(round));
     setPlaying(true);
     setSplosionWave([{ x, y, dir: ORIGIN }]);
   };
@@ -275,15 +273,24 @@ function Sploder() {
       }}
     >
       <div style={{ marginBottom: "1rem" }}>
-        <TurnText>TURN: {turn}</TurnText>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1rem",
+          }}
+        >
+          <InfoText>Turn: {turn}</InfoText>
+          <InfoText style={{ fontSize: "14px" }}>
+            {win ? (win === WIN ? "You win!" : "You lose! Try again!") : ""}
+          </InfoText>
+          <InfoText>Round: {round}</InfoText>
+        </div>
         <GoalText>
           Land your splosion on the green blocks on turn {turnGoal}. By clicking
           on a purple block, you can trigger a splosion. blue blocks will
           reflect your splosion.
         </GoalText>
-        <WinText>
-          {win ? (win === WIN ? "You win!" : "You lose! Try again!") : ""}
-        </WinText>
       </div>
       <SploderTable>
         <tbody>
