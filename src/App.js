@@ -40,11 +40,19 @@ const ParentContentContainer = styled.div`
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-top: 1rem;
 `;
 
 function App() {
   const [codeSpy, setCodeSpy] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const [isTinyMobile, setIsTinyMobile] = useState(window.innerWidth <= 450);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setIsMobile(window.innerWidth <= 600);
+      setIsTinyMobile(window.innerWidth <= 450);
+    });
+  }, []);
 
   return (
     <>
@@ -53,9 +61,14 @@ function App() {
           onToggleCodeSpy={() => {
             setCodeSpy(!codeSpy);
           }}
+          isMobile={isMobile}
+          isTinyMobile={isTinyMobile}
         ></Header>
         <ParentContentContainer
-          style={{ justifyContent: codeSpy ? "space-between" : "center" }}
+          style={{
+            justifyContent: codeSpy ? "space-between" : "center",
+            marginTop: isMobile ? 0 : "1rem",
+          }}
         >
           <ContentContainer>
             <Routes>

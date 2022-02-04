@@ -54,22 +54,13 @@ const headerTabs = [
   ["sploder (WIP)", "/sploder"],
 ];
 
-function Header({ onToggleCodeSpy }) {
+function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-  const [isTinyMobile, setIsTinyMobile] = useState(window.innerWidth <= 450);
 
   //600,4
   const [menuOpen, setMenuOpen] = useState(false);
   const [inspectOpen, setInspectOpen] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setIsMobile(window.innerWidth <= 600);
-      setIsTinyMobile(window.innerWidth <= 450);
-    });
-  }, []);
 
   const renderNavigator = () => {
     if (isMobile && menuOpen)
