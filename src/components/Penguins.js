@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
 import Loading from "./Other/Loading";
 import lofi from "../resources/lofi.mp3";
@@ -9,6 +9,12 @@ function Penguins() {
   const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(true);
   const [yt, setYt] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      if (audio) audio.pause();
+    };
+  }, [audio]);
 
   const startAudio = () => {
     if (!audio) {
