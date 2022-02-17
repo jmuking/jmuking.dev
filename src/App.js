@@ -78,7 +78,9 @@ function App() {
             justifyContent: codeSpy ? "space-between" : "",
             marginTop: isMobile ? 0 : "1rem",
             maxWidth: expanded
-              ? "calc(100% - 4rem)"
+              ? isMobile
+                ? "100%"
+                : "calc(100% - 4rem)"
               : codeSpy
               ? "100rem"
               : "50rem",
