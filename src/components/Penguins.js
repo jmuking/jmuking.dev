@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
 import Loading from "./Other/Loading";
-import lofi from "../resources/lofi.mp3";
+
+import song1 from "../resources/lofi/0.mp3";
+import song2 from "../resources/lofi/1.mp3";
+import song3 from "../resources/lofi/2.mp3";
+import song4 from "../resources/lofi/3.mp3";
+import song5 from "../resources/lofi/4.mp3";
+const songs = [song1, song2, song3, song4, song5];
 
 function Penguins() {
   const penguins = useRef(null);
 
   const [audio, setAudio] = useState(null);
+  const [songIndex, setSongIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [yt, setYt] = useState(null);
 
@@ -18,13 +25,19 @@ function Penguins() {
 
   const startAudio = () => {
     if (!audio) {
-      const audio = new Audio(lofi);
-      audio.loop = true;
+      const audio = new Audio(songs[songIndex]);
       audio.play();
       setAudio(audio);
       setInterval(() => {
         audio.volume = yt.isMuted() ? 0 : yt.getVolume() / 100;
       }, 100);
+
+      audio.onended = () => {
+        const newSongIndex = (songIndex + 1) % songs.length;
+        audio.src = songs[newSongIndex];
+        audio.play();
+        setSongIndex(newSongIndex);
+      };
 
       return;
     }
@@ -65,10 +78,8 @@ function Penguins() {
         opts={{ height: "100%", width: "100%", autoPlay: 1 }}
       ></YouTube>
       <p style={{ textAlign: "left", fontSize: 10 }}>
-        bedtime after a coffee by Barradeen | https://soundcloud.com/barradeen/
-        Creative Commons Attribution-ShareAlike 3.0 Unported
-        https://creativecommons.org/licenses/by-sa/3.0/deed.en_US Music promoted
-        by https://www.chosic.com/free-music/all/
+        All songs you hear on this page are created by{" "}
+        <a href="https://soundcloud.com/barradeen">Barradeen</a>
       </p>
     </div>
   );

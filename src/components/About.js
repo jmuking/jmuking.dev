@@ -8,6 +8,8 @@ function About() {
       style={{
         padding: "1rem",
         background: colors.dark,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <p style={{ color: colors.light, marginTop: "0", lineHeight: "1.6" }}>

@@ -27,6 +27,8 @@ function Footer() {
         display: "flex",
         justifyContent: "center",
         borderTop: `1px solid ${colors.dark}`,
+        background: colors.light,
+        zIndex: 1,
       }}
     >
       <FooterColumn>

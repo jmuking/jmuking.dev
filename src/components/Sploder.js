@@ -63,7 +63,7 @@ const InfoText = styled.div`
 `;
 
 const GoalText = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
 `;
 

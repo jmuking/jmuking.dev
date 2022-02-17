@@ -55,6 +55,7 @@ export const colors = {
   other2: "#4C3957",
   dark: "#33332f",
   light: "#e6e1cf",
+  lighter: "#a6a294",
   invalid: "#bf2626",
   invalidBg: "#666666",
   gold: "#c9962e",

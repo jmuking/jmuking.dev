@@ -6,8 +6,7 @@ import TabButton from "../Other/TabButton";
 
 import menuPng from "../../resources/menu.png";
 import menuOpenPng from "../../resources/menu-open.png";
-import inspectPng from "../../resources/inspect.png";
-import inspectOpenPng from "../../resources/inspect-open.png";
+import VibButton from "./VibButton";
 
 const Title = styled.h1`
   color: ${colors.dark};
@@ -55,13 +54,12 @@ const headerTabs = [
   ["sploder", "/sploder"],
 ];
 
-function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {
+function Header({ isMobile, isTinyMobile }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   //600,4
   const [menuOpen, setMenuOpen] = useState(false);
-  const [inspectOpen, setInspectOpen] = useState(false);
 
   const renderNavigator = () => {
     if (isMobile && menuOpen)
@@ -75,11 +73,6 @@ function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {
                 isMobile={isMobile}
                 active={location.pathname === headerTab[1]}
                 onClick={() => {
-                  try {
-                    navigator.vibrate(10);
-                  } catch {
-                    /*do nothing*/
-                  }
                   setMenuOpen(!menuOpen);
                   navigate(headerTab[1]);
                 }}
@@ -98,11 +91,6 @@ function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {
                 text={headerTab[0]}
                 active={location.pathname === headerTab[1]}
                 onClick={() => {
-                  try {
-                    navigator.vibrate(10);
-                  } catch {
-                    /*do nothing*/
-                  }
                   navigate(headerTab[1]);
                 }}
               ></TabButton>
@@ -115,18 +103,13 @@ function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {
   const renderMenuButton = () => {
     if (isMobile)
       return (
-        <img
-          src={menuOpen ? menuOpenPng : menuPng}
-          alt="menu"
-          onClick={() => {
-            try {
-              navigator.vibrate(10);
-            } catch {
-              /*do nothing*/
-            }
-            setMenuOpen(!menuOpen);
+        <VibButton
+          src={menuPng}
+          toggledSrc={menuOpenPng}
+          onToggled={(toggled) => {
+            setMenuOpen(toggled);
           }}
-        ></img>
+        ></VibButton>
       );
     else return "";
   };
@@ -145,20 +128,6 @@ function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {
           }}
         >
           <Title>{strings.title} &#127918; &#128039; &#128692;</Title>
-          <img
-            src={inspectOpen ? inspectOpenPng : inspectPng}
-            alt="inspect"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              try {
-                navigator.vibrate(10);
-              } catch {
-                /*do nothing*/
-              }
-              setInspectOpen(!inspectOpen);
-              onToggleCodeSpy();
-            }}
-          ></img>
         </div>
       );
   };
