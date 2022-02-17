@@ -3,7 +3,7 @@ import { colors, font } from "../configs/default";
 import emailjs, { init } from "@emailjs/browser";
 import { emailjsSettings } from "../configs/default";
 import styled from "styled-components";
-import Loading from "./Loading";
+import Loading from "./Other/Loading";
 
 init(emailjsSettings.userId);
 

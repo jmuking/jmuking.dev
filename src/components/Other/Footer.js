@@ -1,5 +1,5 @@
-import { colors, links, strings } from "../configs/default";
-import resumePdf from "../resources/Resume.pdf";
+import { colors, links, strings } from "../../configs/default";
+import resumePdf from "../../resources/Resume.pdf";
 import styled from "styled-components";
 
 const spacingStyle = {

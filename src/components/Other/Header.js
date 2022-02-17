@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { colors, strings } from "../configs/default";
+import { colors, strings } from "../../configs/default";
 import styled from "styled-components";
-import TabButton from "./TabButton";
+import TabButton from "../Other/TabButton";
 
-import menuPng from "../resources/menu.png";
-import menuOpenPng from "../resources/menu-open.png";
-import inspectPng from "../resources/inspect.png";
-import inspectOpenPng from "../resources/inspect-open.png";
+import menuPng from "../../resources/menu.png";
+import menuOpenPng from "../../resources/menu-open.png";
+import inspectPng from "../../resources/inspect.png";
+import inspectOpenPng from "../../resources/inspect-open.png";
 
 const Title = styled.h1`
   color: ${colors.dark};
@@ -51,7 +51,8 @@ const headerTabs = [
   ["contact", "/contact"],
   ["chill", "/chill"],
   ["play", "/play"],
-  ["sploder (WIP)", "/sploder"],
+  ["penguins", "/penguins"],
+  ["sploder", "/sploder"],
 ];
 
 function Header({ onToggleCodeSpy, isMobile, isTinyMobile }) {

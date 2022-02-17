@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SploderItem from "./SploderItem";
+import SploderItem from "./Sploder/SploderItem";
 import React, { useEffect, useState } from "react";
 import { sploderMaps } from "../configs/default";
 

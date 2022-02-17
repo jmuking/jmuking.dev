@@ -1,18 +1,19 @@
 import "./App.css";
 
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/Other/Header";
+import Footer from "./components/Other/Footer";
 import Home from "./components/Home";
 import About from "./components/About";
-import Chill from "./components/Chill";
 import Play from "./components/Play";
 import Sploder from "./components/Sploder";
-import CodeContainer from "./components/CodeContainer";
+import CodeContainer from "./components/Other/CodeContainer";
 import { Routes, Route } from "react-router-dom";
 import { colors } from "./configs/default";
 import styled from "styled-components";
 import Contact from "./components/Contact";
+import Penguins from "./components/Penguins";
+import Chill from "./components/Chill";
 
 const AppContainer = styled.div`
   color: ${colors.dark};
@@ -49,8 +50,8 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      setIsMobile(window.innerWidth <= 600);
-      setIsTinyMobile(window.innerWidth <= 450);
+      setIsMobile(window.innerWidth <= 900);
+      setIsTinyMobile(window.innerWidth <= 490);
     });
   }, []);
 
@@ -77,6 +78,7 @@ function App() {
               <Route path="/contact" element={<Contact></Contact>}></Route>
               <Route path="/chill" element={<Chill></Chill>}></Route>
               <Route path="/play" element={<Play></Play>}></Route>
+              <Route path="/penguins" element={<Penguins></Penguins>}></Route>
               <Route path="/sploder" element={<Sploder></Sploder>}></Route>
             </Routes>
           </ContentContainer>

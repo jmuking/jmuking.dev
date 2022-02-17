@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { colors, links } from "../configs/default";
+import { colors, links } from "../../configs/default";
 import { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 

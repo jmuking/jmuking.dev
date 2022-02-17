@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { colors, font } from "../configs/default";
+import { colors, font } from "../../configs/default";
 
 function TabButton({ active, text, onClick, isMobile }) {
   const [hovering, setHovering] = useState(false);

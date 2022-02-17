@@ -1,4 +1,4 @@
-import loadingGif from "../resources/loading.gif";
+import loadingGif from "../../resources/loading.gif";
 
 function Loading({ show }) {
   return (

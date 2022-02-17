@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { colors } from "../configs/default";
+import { colors } from "../../configs/default";
 
 function GameFrame({ title, onLoaded, src, href }) {
   const game = useRef(null);

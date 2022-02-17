@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { games } from "../configs/default";
-import GameFrame from "./GameFrame";
-import Loading from "./Loading";
+import GameFrame from "./Frame/GameFrame";
+import Loading from "./Other/Loading";
 
 import jeffMonke from "../resources/jeff-monke.gif";
 import samMonke from "../resources/sam-monke.gif";
