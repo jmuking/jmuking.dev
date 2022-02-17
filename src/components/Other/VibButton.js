@@ -5,8 +5,13 @@ function VibButton({
   toggledSrc,
   onToggled = (toggled) => {},
   style = {},
+  initToggled = false,
 }) {
-  const [toggled, setToggled] = useState(null);
+  const [toggled, setToggled] = useState(initToggled);
+
+  useEffect(() => {
+    setToggled(initToggled);
+  }, [initToggled]);
 
   return (
     <img

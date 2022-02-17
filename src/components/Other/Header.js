@@ -101,6 +101,7 @@ function Header({ isMobile, isTinyMobile }) {
   };
 
   const renderMenuButton = () => {
+    console.log(menuOpen);
     if (isMobile)
       return (
         <VibButton
@@ -109,6 +110,7 @@ function Header({ isMobile, isTinyMobile }) {
           onToggled={(toggled) => {
             setMenuOpen(toggled);
           }}
+          initToggled={menuOpen}
         ></VibButton>
       );
     else return "";
