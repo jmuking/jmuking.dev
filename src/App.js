@@ -90,7 +90,7 @@ function App() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "right",
+                justifyContent: "flex-end",
                 padding: "2rem",
                 paddingBottom: "1rem",
                 paddingTop: "1rem",
