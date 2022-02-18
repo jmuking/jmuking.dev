@@ -181,13 +181,6 @@ function Contact() {
               color: !validSubmit ? colors.dark : colors.light,
               cursor: !validSubmit ? "not-allowed" : "pointer",
             }}
-            onClick={() => {
-              try {
-                navigator.vibrate(10);
-              } catch {
-                /*do nothing*/
-              }
-            }}
           ></ContactSubmit>
           <p style={{ color: colors.invalid, textAlign: "left" }}>
             * = required

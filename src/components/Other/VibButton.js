@@ -19,12 +19,6 @@ function VibButton({
       alt="inspect"
       style={{ ...{ cursor: "pointer" }, ...style }}
       onClick={() => {
-        try {
-          navigator.vibrate(10);
-        } catch {
-          /*do nothing*/
-        }
-
         const newToggled = !toggled;
         onToggled(newToggled);
         setToggled(newToggled);

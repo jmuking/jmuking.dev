@@ -6,14 +6,7 @@ function TabButton({ active, text, onClick, isMobile }) {
 
   return (
     <button
-      onClick={() => {
-        try {
-          navigator.vibrate(10);
-        } catch {
-          /*do nothing*/
-        }
-        onClick();
-      }}
+      onClick={onClick}
       onMouseEnter={() => {
         setHovering(true);
       }}
