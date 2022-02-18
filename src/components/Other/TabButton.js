@@ -38,6 +38,7 @@ function TabButton({ active, text, onClick, isMobile }) {
         borderTop: isMobile ? `2px solid ${colors.dark}` : "0",
         fontFamily: font,
         zIndex: 100,
+        margin: 0,
         boxShadow: active
           ? !isMobile
             ? `3px 3px 2px 0 ${colors.dark}`

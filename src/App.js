@@ -90,9 +90,12 @@ function App() {
             <div
               style={{
                 display: "flex",
-                alignSelf: "end",
-                marginRight: "2rem",
-                marginTop: "2rem",
+                justifyContent: "right",
+                padding: "2rem",
+                paddingBottom: "1rem",
+                paddingTop: "1rem",
+                background: colors.primary,
+                borderBottom: `1px solid ${colors.dark}`,
               }}
             >
               <VibButton
@@ -117,7 +120,7 @@ function App() {
             </div>
           )}
 
-          <div style={{ display: "flex", flexGrow: 1 }}>
+          <div style={{ display: "flex", flexGrow: 1, height: "10rem" }}>
             <ContentContainer>
               <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
