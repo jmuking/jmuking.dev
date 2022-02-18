@@ -50,7 +50,6 @@ const ParentContentContainer = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid ${colors.dark};
-  border-bottom: 0;
   background: ${colors.light};
 `;
 
@@ -79,6 +78,7 @@ function App() {
           style={{
             justifyContent: codeSpy ? "space-between" : "",
             marginTop: isMobile ? 0 : "1rem",
+            marginBottom: isMobile ? 0 : "1rem",
             maxWidth: expanded
               ? isMobile
                 ? "100%"

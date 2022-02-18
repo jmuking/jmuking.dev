@@ -10,7 +10,7 @@ const spacingStyle = {
   textAlign: "center",
 };
 
-const aFooterStyle = { ...spacingStyle, ...{ color: colors.tertiary } };
+const aFooterStyle = { ...spacingStyle, ...{ color: colors.primary } };
 
 const FooterColumn = styled.div`
   display: flex;
@@ -27,7 +27,8 @@ function Footer() {
         display: "flex",
         justifyContent: "center",
         borderTop: `1px solid ${colors.dark}`,
-        background: colors.light,
+        background: colors.dark,
+        color: colors.light,
         zIndex: 1,
       }}
     >

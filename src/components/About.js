@@ -14,7 +14,7 @@ function About() {
         friend Sam) that you can play in the "play" section of this site. When
         I'm making games, I love to keep improving on my pixel art. See some of
         my art{" "}
-        <a href="/play" style={{ color: colors.secondary }}>
+        <a href="/play" style={{ color: colors.tertiary }}>
           here
         </a>
         !
