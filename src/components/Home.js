@@ -14,7 +14,7 @@ function Home() {
         src={meJpg}
         alt="me"
         width="100%"
-        style={{ maxWidth: "500px" }}
+        style={{ maxWidth: "min(50%, 500px)" }}
       ></img>
       <p style={{ lineHeight: "1.8" }}>
         I am a full stack software engineer who works mainly with React + TS on
