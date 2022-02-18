@@ -3,17 +3,9 @@ import gamePng from "../resources/game.png";
 import loveJpg from "../resources/love.jpg";
 
 export const photos = [
-  {
-    src: bikeJpg,
-    width: 1,
-    height: 0.8,
-  },
-  {
-    src: loveJpg,
-    width: 1.1,
-    height: 0.8,
-  },
-  { src: gamePng, width: 1.8, height: 1 },
+  { src: bikeJpg, width: "46%" },
+  { src: loveJpg, width: "51%" },
+  { src: gamePng, width: "100%" },
 ];
 
 export const games = [

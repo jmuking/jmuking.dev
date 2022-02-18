@@ -1,5 +1,3 @@
-import styled from "styled-components";
-import Gallery from "react-photo-gallery";
 import { colors, photos } from "../configs/default";
 
 function About() {
@@ -21,7 +19,28 @@ function About() {
         </a>
         !
       </p>
-      <Gallery photos={photos}></Gallery>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        {photos.map((photo, index) => {
+          return (
+            <img
+              src={photo.src}
+              alt={`${index}`}
+              style={{
+                aspectRatio: 1,
+                width: `${photo.width}`,
+                marginTop: "1rem",
+              }}
+            ></img>
+          );
+        })}
+      </div>
     </div>
   );
 }
