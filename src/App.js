@@ -60,13 +60,15 @@ function App() {
   const [expanded, setExpanded] = useState(false);
   const [isTinyMobile, setIsTinyMobile] = useState(window.innerWidth <= 450);
 
+  const listenToWindow = () => {
+    const newIsMobile = window.innerWidth <= 900;
+    if (newIsMobile) setExpanded(newIsMobile);
+    setIsMobile(newIsMobile);
+    setIsTinyMobile(window.innerWidth <= 490);
+  };
+
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      const newIsMobile = window.innerWidth <= 900;
-      setIsMobile(newIsMobile);
-      setExpanded(newIsMobile);
-      setIsTinyMobile(window.innerWidth <= 490);
-    });
+    window.addEventListener("resize", listenToWindow);
   }, []);
 
   return (
@@ -116,6 +118,7 @@ function App() {
                 style={{
                   width: "2rem",
                 }}
+                initToggled={expanded}
               ></VibButton>
             </div>
           )}

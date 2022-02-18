@@ -101,7 +101,6 @@ function Header({ isMobile, isTinyMobile }) {
   };
 
   const renderMenuButton = () => {
-    console.log(menuOpen);
     if (isMobile)
       return (
         <VibButton
