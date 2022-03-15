@@ -7,10 +7,11 @@ function Home() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        height: "100%",
       }}
     >
       <h2 style={{ marginTop: 0 }}>Sr. Software Engineer</h2>
-      <div>
+      <div style={{ height: "calc(100% - 32px)" }}>
         <img
           src={meJpg}
           alt="me"
