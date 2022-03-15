@@ -83,7 +83,7 @@ function App() {
                 ? "100%"
                 : "calc(100% - 4rem)"
               : codeSpy
-              ? "100rem"
+              ? "min(100rem, 90%)"
               : "50rem",
           }}
         >
@@ -121,7 +121,9 @@ function App() {
             </div>
           )}
 
-          <div style={{ display: "flex", flexGrow: 1 }}>
+          <div
+            style={{ display: "flex", flexGrow: 1, width: "calc(100% - 65px)" }}
+          >
             <ContentContainer>
               <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
