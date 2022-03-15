@@ -51,7 +51,7 @@ function CodeContainer() {
       <div
         style={{
           backgroundColor: colors.dark,
-          color: colors.light,
+          color: "white",
           padding: "1rem",
           whiteSpace: "pre",
           overflowX: "auto",
