@@ -18,8 +18,8 @@ function Home() {
           width="100%"
           style={{
             display: "block",
-            maxWidth: "min(65%, 2651px)",
-            maxHeight: "min(65%, 2388px)",
+            maxWidth: "min(50%, 2651px)",
+            maxHeight: "min(70%, 2388px)",
             width: "auto",
             height: "auto",
             float: "left",
