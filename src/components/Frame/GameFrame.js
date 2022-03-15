@@ -24,10 +24,7 @@ function GameFrame({ title, onLoaded, src, href }) {
       src={`${src}?bg_color=${colors.dark.replace(
         "#",
         ""
-      )}&fg_color=${colors.light.replace(
-        "#",
-        ""
-      )}&link_color=${colors.other1.replace(
+      )}&fg_color=FFFFFF&link_color=${colors.other1.replace(
         "#",
         ""
       )}&border_color=${colors.dark.replace("#", "")}`}

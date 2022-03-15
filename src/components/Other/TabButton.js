@@ -19,12 +19,11 @@ function TabButton({ active, text, onClick, isMobile }) {
           : hovering
           ? colors.other2
           : colors.dark,
-        color: active ? colors.dark : colors.light,
+        color: active ? colors.dark : "white",
         paddingLeft: "2rem",
         paddingRight: "2rem",
         textAlign: "center",
         border: `1px solid ${colors.dark}`,
-        borderTop: "0px",
         height: active && !isMobile ? "100%" : !isMobile ? "80%" : "4rem",
         fontWeight: active ? "bold" : "normal",
         fontSize: active ? "18px" : "14px",

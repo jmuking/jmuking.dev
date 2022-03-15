@@ -110,6 +110,7 @@ function Header({ isMobile, isTinyMobile }) {
             setMenuOpen(toggled);
           }}
           initToggled={menuOpen}
+          style={{ height: "2rem" }}
         ></VibButton>
       );
     else return "";

@@ -47,7 +47,7 @@ const ContactSubmit = styled.input`
   font-size: 16px;
   font-weight: bold;
   background-color: ${colors.tertiary};
-  color: ${colors.light};
+  color: white;
   border: 1px solid ${colors.dark};
   font-family: ${font};
 `;
@@ -178,7 +178,7 @@ function Contact() {
                 : submitHovering
                 ? colors.other1
                 : colors.tertiary,
-              color: !validSubmit ? colors.dark : colors.light,
+              color: !validSubmit ? colors.dark : "white",
               cursor: !validSubmit ? "not-allowed" : "pointer",
             }}
           ></ContactSubmit>

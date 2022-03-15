@@ -28,7 +28,7 @@ function Footer() {
         justifyContent: "center",
         borderTop: `1px solid ${colors.dark}`,
         background: colors.dark,
-        color: colors.light,
+        color: "white",
         zIndex: 1,
       }}
     >

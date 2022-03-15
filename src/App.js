@@ -46,7 +46,6 @@ const ParentContentContainer = styled.div`
   width: 100%;
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid ${colors.dark};
@@ -92,12 +91,11 @@ function App() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "flex-end",
-                padding: "2rem",
-                paddingBottom: "1rem",
+                flexDirection: "column",
+                padding: "1rem",
                 paddingTop: "1rem",
-                background: colors.primary,
-                borderBottom: `1px solid ${colors.dark}`,
+                background: colors.dark,
+                borderRight: `1px solid ${colors.dark}`,
               }}
             >
               <VibButton
@@ -105,8 +103,8 @@ function App() {
                 toggledSrc={inspectOpenPng}
                 onToggled={setCodeSpy}
                 style={{
-                  width: "2rem",
-                  marginRight: "2rem",
+                  height: "2rem",
+                  marginBottom: "2rem",
                 }}
               ></VibButton>
               <VibButton
@@ -116,14 +114,14 @@ function App() {
                   setExpanded(toggled);
                 }}
                 style={{
-                  width: "2rem",
+                  height: "2rem",
                 }}
                 initToggled={expanded}
               ></VibButton>
             </div>
           )}
 
-          <div style={{ display: "flex", flexGrow: 1, height: "10rem" }}>
+          <div style={{ display: "flex", flexGrow: 1 }}>
             <ContentContainer>
               <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
