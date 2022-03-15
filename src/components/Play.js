@@ -10,9 +10,7 @@ import styled from "styled-components";
 
 const MonkeImg = styled.img`
   min-width: 0.5rem;
-  max-width: 5rem;
   min-height: 0.5rem;
-  max-height: 5rem;
 `;
 
 function Play() {
