@@ -15,7 +15,13 @@ function Home() {
           src={meJpg}
           alt="me"
           width="100%"
-          style={{ maxWidth: "min(50%, 500px)" }}
+          style={{
+            display: "block",
+            maxWidth: "min(50%, 671px)",
+            maxHeight: "min(35%, 604px)",
+            width: "auto",
+            height: "auto",
+          }}
         ></img>
         <p
           style={{
