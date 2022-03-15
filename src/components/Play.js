@@ -9,8 +9,10 @@ import monke from "../resources/monke-nomonkey.png";
 import styled from "styled-components";
 
 const MonkeImg = styled.img`
-  min-width: 1rem;
-  min-height: 1rem;
+  min-width: 0.5rem;
+  max-width: 5rem;
+  min-height: 0.5rem;
+  max-height: 5rem;
 `;
 
 function Play() {
@@ -51,9 +53,9 @@ function Play() {
           justifyContent: "space-between",
         }}
       >
-        <MonkeImg src={jeffMonke} alt="Jeff" height="100rem"></MonkeImg>
-        <MonkeImg src={monke} alt="monke" height="200rem"></MonkeImg>
-        <MonkeImg src={samMonke} alt="Sam" height="100rem"></MonkeImg>
+        <MonkeImg src={jeffMonke} alt="Jeff" height="75rem"></MonkeImg>
+        <MonkeImg src={monke} alt="monke" height="150rem"></MonkeImg>
+        <MonkeImg src={samMonke} alt="Sam" height="75rem"></MonkeImg>
       </div>
     </div>
   );
