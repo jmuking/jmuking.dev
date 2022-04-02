@@ -8,8 +8,8 @@ import About from "./components/About";
 import Play from "./components/Play";
 import Sploder from "./components/Sploder";
 import CodeContainer from "./components/Other/CodeContainer";
-import { Routes, Route } from "react-router-dom";
-import { colors } from "./configs/default";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { colors, headerTabs } from "./configs/default";
 import styled from "styled-components";
 import Contact from "./components/Contact";
 import Penguins from "./components/Penguins";
@@ -50,9 +50,13 @@ const ParentContentContainer = styled.div`
   overflow-x: hidden;
   border: 1px solid ${colors.dark};
   background: ${colors.light};
+  transition: max-width 2s, ease 0.5s;
 `;
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [codeSpy, setCodeSpy] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   const [expanded, setExpanded] = useState(false);
@@ -68,6 +72,13 @@ function App() {
   useEffect(() => {
     window.addEventListener("resize", listenToWindow);
   }, []);
+
+  useEffect(() => {
+    const validRoutes = headerTabs.map((headerTab) => {
+      return headerTab[1];
+    });
+    if (!validRoutes.includes(location.pathname)) navigate("/");
+  }, [location, navigate]);
 
   return (
     <>

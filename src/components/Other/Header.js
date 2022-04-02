@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { colors, strings } from "../../configs/default";
+import { colors, strings, headerTabs } from "../../configs/default";
 import styled from "styled-components";
 import TabButton from "../Other/TabButton";
 
@@ -43,16 +43,6 @@ const MobileNavigator = styled.div`
   height: auto;
   width: 100%;
 `;
-
-const headerTabs = [
-  ["home", "/"],
-  ["about", "/about"],
-  ["contact", "/contact"],
-  ["chill", "/chill"],
-  ["play", "/play"],
-  ["penguins", "/penguins"],
-  ["sploder", "/sploder"],
-];
 
 function Header({ isMobile, isTinyMobile }) {
   const navigate = useNavigate();

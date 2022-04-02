@@ -21,6 +21,16 @@ export const games = [
   },
 ];
 
+export const headerTabs = [
+  ["home", "/"],
+  ["about", "/about"],
+  ["contact", "/contact"],
+  ["chill", "/chill"],
+  ["play", "/play"],
+  ["penguins", "/penguins"],
+  ["sploder", "/sploder"],
+];
+
 export const strings = {
   title: "Jeff King",
   resume: "resume",
