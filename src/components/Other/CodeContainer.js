@@ -4,6 +4,9 @@ import { colors, links } from "../../configs/default";
 import { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 const CodeContent = styled.div`
   width: 100%;
   display: flex;
@@ -48,17 +51,9 @@ function CodeContainer() {
 
   return (
     <CodeContent>
-      <div
-        style={{
-          backgroundColor: colors.dark,
-          color: "white",
-          padding: "1rem",
-          whiteSpace: "pre",
-          overflowX: "auto",
-        }}
-      >
+      <SyntaxHighlighter language="javascript" style={materialDark}>
         {codeContent}
-      </div>
+      </SyntaxHighlighter>
     </CodeContent>
   );
 }
