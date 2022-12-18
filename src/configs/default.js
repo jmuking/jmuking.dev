@@ -1,11 +1,15 @@
 import bikeJpg from "../resources/bike.jpg";
 import gamePng from "../resources/game.png";
 import loveJpg from "../resources/love.jpg";
+import alwaysJpg from "../resources/always.jpg";
+import clarkJpg from "../resources/clark.jpg";
 
 export const photos = [
-  { src: bikeJpg, width: "46%" },
-  { src: loveJpg, width: "51%" },
+  { src: bikeJpg, width: "50%" },
+  { src: loveJpg, width: "50%" },
   { src: gamePng, width: "100%" },
+  { src: clarkJpg, width: "50%" },
+  { src: alwaysJpg, width: "50%" },
 ];
 
 export const games = [

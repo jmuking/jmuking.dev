@@ -36,7 +36,8 @@ function Home() {
         >
           I am a full stack software engineer who works mainly with React + TS
           on the front end, and Python on the back end. I am currently working
-          as a Sr. Software Engineer at Esri.
+          as a Software Engineer III at{" "}
+          <a href="https://www.anaconda.com/">Anaconda</a>.
         </p>
       </div>
     </div>
