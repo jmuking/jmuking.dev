@@ -22,8 +22,8 @@ function About() {
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap",
-          width: "100%",
+          flexDirection: "column",
+          maxWidth: "100%",
           justifyContent: "space-between",
         }}
       >
@@ -34,7 +34,8 @@ function About() {
               alt={`${index}`}
               style={{
                 aspectRatio: 1,
-                width: `${photo.width}`,
+                maxWidth: "100%",
+                height: "fit-content",
                 marginTop: "1rem",
               }}
             ></img>

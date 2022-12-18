@@ -5,11 +5,11 @@ import alwaysJpg from "../resources/always.jpg";
 import clarkJpg from "../resources/clark.jpg";
 
 export const photos = [
-  { src: bikeJpg, width: "50%" },
-  { src: loveJpg, width: "50%" },
-  { src: gamePng, width: "100%" },
-  { src: clarkJpg, width: "50%" },
-  { src: alwaysJpg, width: "50%" },
+  { src: bikeJpg },
+  { src: loveJpg },
+  { src: gamePng },
+  { src: clarkJpg },
+  { src: alwaysJpg },
 ];
 
 export const games = [
