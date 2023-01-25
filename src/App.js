@@ -44,13 +44,16 @@ const ContentContainer = styled.div`
 
 const ParentContentContainer = styled.div`
   width: 100%;
-  flex-grow: 1;
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid ${colors.dark};
   background: ${colors.light};
   transition: max-width 2s, ease 0.5s;
+`;
+
+const SpaceFiller = styled.div`
+  flex-grow: 1;
 `;
 
 function App() {
@@ -133,7 +136,11 @@ function App() {
           )}
 
           <div
-            style={{ display: "flex", flexGrow: 1, width: "calc(100% - 65px)" }}
+            style={{
+              display: "flex",
+              flexGrow: 1,
+              width: "calc(100% - 65px)",
+            }}
           >
             <ContentContainer>
               <Routes>
@@ -149,6 +156,7 @@ function App() {
             {codeSpy ? <CodeContainer></CodeContainer> : ""}
           </div>
         </ParentContentContainer>
+        <SpaceFiller></SpaceFiller>
         <Footer></Footer>
       </AppContainer>
     </>

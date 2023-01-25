@@ -10,7 +10,7 @@ function Home() {
         height: "100%",
       }}
     >
-      <h2 style={{ marginTop: 0 }}>Sr. Software Engineer</h2>
+      <h2 style={{ marginTop: 0 }}>Code Slinger</h2>
       <div style={{ height: "calc(100% - 32px)" }}>
         <img
           src={meJpg}
@@ -34,9 +34,10 @@ function Home() {
             marginBottom: 0,
           }}
         >
-          I am a full stack software engineer who works mainly with React + TS
-          on the front end, and Python on the back end. I am currently working
-          as a Software Engineer III at{" "}
+          I am a software engineer who works mainly on the front end. A lot of
+          my work is focused on application and product development. The
+          languages that I spend the most time in are: React, Angular, Svelte,
+          and Python. I am currently working as a Software Engineer III at{" "}
           <a href="https://www.anaconda.com/">Anaconda</a>.
         </p>
       </div>
