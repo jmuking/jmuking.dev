@@ -25,6 +25,7 @@ function Home() {
             float: "left",
             marginRight: "2rem",
             marginBottom: "2rem",
+            borderRadius: "5%",
           }}
         ></img>
         <p

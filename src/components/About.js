@@ -37,6 +37,7 @@ function About() {
                 maxWidth: "100%",
                 height: "fit-content",
                 marginTop: "1rem",
+                borderRadius: "5%",
               }}
             ></img>
           );
