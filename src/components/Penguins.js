@@ -58,7 +58,7 @@ function Penguins() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "600px",
+        height: "100vh",
       }}
     >
       <Loading show={loading}></Loading>

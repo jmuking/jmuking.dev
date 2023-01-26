@@ -7,6 +7,8 @@ import { Buffer } from "buffer";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+import Loading from "../Other/Loading";
+
 const CodeContent = styled.div`
   width: 100%;
   display: flex;
@@ -22,6 +24,7 @@ const CodeContent = styled.div`
 function CodeContainer() {
   const location = useLocation();
   const [codeContent, setCodeContent] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let path = location.pathname;
@@ -31,6 +34,7 @@ function CodeContainer() {
     const upperCase = lowerCase.toUpperCase();
     const truePath = path.replace(lowerCase, upperCase);
 
+    setLoading(true);
     fetch(`${links.gitApi}${truePath}.js`)
       .then(
         (response) => response.json(),
@@ -42,18 +46,23 @@ function CodeContainer() {
         (data) => {
           const buff = Buffer.from(data.content, "base64");
           setCodeContent(buff.toString("utf-8"));
+          setLoading(false);
         },
         (error) => {
           console.error(error);
+          setLoading(false);
         }
       );
   }, [location]);
 
   return (
     <CodeContent>
-      <SyntaxHighlighter language="javascript" style={materialDark}>
-        {codeContent}
-      </SyntaxHighlighter>
+      <Loading show={loading} />
+      {!loading && (
+        <SyntaxHighlighter language="javascript" style={materialDark}>
+          {codeContent}
+        </SyntaxHighlighter>
+      )}
     </CodeContent>
   );
 }

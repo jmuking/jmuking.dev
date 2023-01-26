@@ -7,6 +7,7 @@ function Frame({
   infoText = "",
   style = {},
   id = "",
+  fullHeight = false,
   onLoaded = () => {},
 }) {
   const frame = useRef(null);
@@ -30,7 +31,7 @@ function Frame({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
+        height: fullHeight ? "100vh" : "100%",
       }}
     >
       <Loading show={loading}></Loading>

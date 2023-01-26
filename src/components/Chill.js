@@ -5,7 +5,7 @@ function Chill() {
     <Frame
       src="https://open.spotify.com/embed/playlist/37i9dQZF1EIgnYxCSnxPNW?utm_source=generator&theme=0"
       title="Chill Tunes"
-      style={{ minHeight: "600px" }}
+      fullHeight={true}
     ></Frame>
   );
 }

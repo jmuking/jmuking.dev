@@ -49,7 +49,7 @@ const ParentContentContainer = styled.div`
   overflow-x: hidden;
   border: 1px solid ${colors.dark};
   background: ${colors.light};
-  transition: min-height 2s, max-width 2s, ease 0.5s;
+  transition: max-height 2s, max-width 2s, ease 0.5s;
 `;
 
 const SpaceFiller = styled.div`
@@ -99,11 +99,7 @@ function App() {
               : codeSpy
               ? "min(100rem, 90%)"
               : "50rem",
-            minHeight: isMobile
-              ? "calc(100% - 11rem)"
-              : expanded
-              ? "calc(100vh - 17rem)"
-              : "10%",
+            maxHeight: isMobile || expanded ? "100%" : "",
           }}
         >
           {!isMobile && (
