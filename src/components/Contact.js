@@ -101,7 +101,7 @@ function Contact() {
     setValidEmail(validate);
   };
 
-  const renderContact = () => {
+  const TrueContact = () => {
     if (sent)
       return (
         <h3>
@@ -195,7 +195,7 @@ function Contact() {
         textAlign: "center",
       }}
     >
-      {renderContact()}
+      <TrueContact />
     </div>
   );
 }

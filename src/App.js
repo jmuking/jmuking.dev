@@ -154,7 +154,7 @@ function App() {
                 <Route path="/sploder" element={<Sploder></Sploder>}></Route>
               </Routes>
             </ContentContainer>
-            {codeSpy ? <CodeContainer></CodeContainer> : ""}
+            {codeSpy && <CodeContainer></CodeContainer>}
           </div>
         </ParentContentContainer>
         <SpaceFiller></SpaceFiller>
