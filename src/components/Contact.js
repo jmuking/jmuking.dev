@@ -98,19 +98,23 @@ function Contact() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
 
-    setValidEmail(validate);
+    const validEmail = validate ? email : false;
+    setValidEmail(validEmail);
   };
 
-  const TrueContact = () => {
-    if (sent)
-      return (
+  return (
+    <div
+      style={{
+        textAlign: "center",
+      }}
+    >
+      {sent && (
         <h3>
           Thank you for the email! I will get back to you shortly &#128512;.
         </h3>
-      );
-    else if (loading) return <Loading show={loading}></Loading>;
-    else
-      return (
+      )}
+      {loading && <Loading show={loading}></Loading>}
+      {!sent && !loading && (
         <ContactForm ref={form} onSubmit={sendEmail}>
           <ContactLabel>
             <div>
@@ -119,8 +123,9 @@ function Contact() {
             </div>
             <ContactInput
               type="text"
-              name="user_name"
+              name="name"
               placeholder="Joe Mama"
+              value={validName || null}
               onChange={(evt) => {
                 setValidName(evt.target.value);
               }}
@@ -136,8 +141,9 @@ function Contact() {
             </div>
             <ContactInput
               type="email"
-              name="user_email"
+              name="email"
               placeholder="joe.mama@gmail.com"
+              value={validEmail || null}
               onChange={(evt) => {
                 validateEmail(evt.target.value);
               }}
@@ -154,6 +160,7 @@ function Contact() {
             <ContactTextArea
               name="message"
               placeholder="Have you ever heard of my friend Joe?"
+              value={validMessage || null}
               onChange={(evt) => {
                 setValidMessage(evt.target.value);
               }}
@@ -186,16 +193,7 @@ function Contact() {
             * = required
           </p>
         </ContactForm>
-      );
-  };
-
-  return (
-    <div
-      style={{
-        textAlign: "center",
-      }}
-    >
-      <TrueContact />
+      )}
     </div>
   );
 }
