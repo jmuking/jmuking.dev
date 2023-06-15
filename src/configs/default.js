@@ -1,15 +1,21 @@
 import bikeJpg from "../resources/bike.jpg";
+import bike2Jpg from "../resources/bike2.jpg";
 import gamePng from "../resources/game.png";
 import loveJpg from "../resources/love.jpg";
 import alwaysJpg from "../resources/always.jpg";
 import clarkJpg from "../resources/clark.jpg";
+import coffeeJpg from "../resources/coffee.jpg";
+import pirateJpg from "../resources/pirate.jpg";
 
 export const photos = [
   { src: bikeJpg },
   { src: loveJpg },
   { src: gamePng },
+  { src: coffeeJpg },
+  { src: pirateJpg },
   { src: clarkJpg },
   { src: alwaysJpg },
+  { src: bike2Jpg },
 ];
 
 export const games = [
