@@ -63,7 +63,7 @@ function Penguins() {
     >
       <Loading show={loading}></Loading>
       <YouTube
-        videoId={"kZmXVU9c668"}
+        videoId={"8HpGjyzzJTI"}
         title={"Penguins Time"}
         onReady={(event) => {
           const ytFrame = penguins.current?.children[1];
