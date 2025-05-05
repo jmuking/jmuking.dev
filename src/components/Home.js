@@ -39,8 +39,8 @@ function Home() {
           my work is focused on application and product development. The
           languages that I spend the most time in are: <b>React and Python.</b>{" "}
           I am currently working as a <b>Sr. Software Engineer</b> at{" "}
-          <a href="https://earthshot.eco">
-            <b>Earthshot Labs</b>
+          <a href="https://target.com">
+            <b>Target</b>
           </a>
           .
         </p>
