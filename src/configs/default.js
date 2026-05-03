@@ -76,9 +76,9 @@ export const colors = {
 export const font = "JetBrains Mono";
 
 export const emailjsSettings = {
-  serviceId: "service_ek1nz9c",
-  templateId: "template_l8ni544",
-  userId: "user_s58f0r1kqLue155XPVicV",
+  serviceId: process.env.EMAILJS_SERVICE_ID,
+  templateId: process.env.EMAILJS_TEMPLATE_ID,
+  userId: process.env.EMAILJS_USER_ID,
 };
 
 export const sploderMaps = [
