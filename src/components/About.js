@@ -9,6 +9,9 @@ function About() {
         display: "flex",
         flexDirection: "column",
         gap: 4,
+        width: "100%",
+        maxWidth: "56rem",
+        mx: "auto",
       }}
     >
       <Box
@@ -79,6 +82,7 @@ function About() {
           flexDirection: "column",
           maxWidth: "100%",
           justifyContent: "space-between",
+          mx: "auto",
         }}
       >
         {photos.map((photo, index) => {
