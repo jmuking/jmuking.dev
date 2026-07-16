@@ -11,13 +11,17 @@ This site now runs on Vite and uses MUI Material for the main application shell 
 
 ## Environment Variables
 
-Vite only exposes client-side variables prefixed with `VITE_`.
+This app now reads client-safe values from a Netlify Function at
+`/.netlify/functions/client-env`.
 
 Current app variables:
 
-- `VITE_EMAILJS_SERVICE_ID`
-- `VITE_EMAILJS_TEMPLATE_ID`
-- `VITE_EMAILJS_USER_ID`
-- `VITE_PENGUIN_LIVESTREAM_ID`
+- `EMAILJS_SERVICE_ID`
+- `EMAILJS_TEMPLATE_ID`
+- `EMAILJS_USER_ID`
+- `PENGUIN_LIVESTREAM_ID`
 
-Store them in `.env.local` for local development.
+Set these in Netlify site environment variables.
+
+For local development with env values, run with `netlify dev` so the function can
+read your local `.env.local` values.

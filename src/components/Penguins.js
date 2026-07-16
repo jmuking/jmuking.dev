@@ -8,6 +8,7 @@ import song2 from "../resources/lofi/1.mp3";
 import song3 from "../resources/lofi/2.mp3";
 import song4 from "../resources/lofi/3.mp3";
 import song5 from "../resources/lofi/4.mp3";
+import { getClientEnv } from "../configs/env";
 const songs = [song1, song2, song3, song4, song5];
 
 function Penguins() {
@@ -91,7 +92,7 @@ function Penguins() {
         <YouTube
           className="penguins-player"
           iframeClassName="penguins-player-frame"
-          videoId={import.meta.env.VITE_PENGUIN_LIVESTREAM_ID}
+          videoId={getClientEnv("PENGUIN_LIVESTREAM_ID")}
           title={"Penguins Time"}
           onReady={(event) => {
             const ytFrame = playerContainer.current?.querySelector("iframe");
