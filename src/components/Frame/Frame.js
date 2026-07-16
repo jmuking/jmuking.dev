@@ -31,14 +31,19 @@ function Frame({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: fullHeight ? "100vh" : "100%",
+        width: "100%",
+        height: fullHeight ? "100%" : "auto",
+        minHeight: 0,
       }}
     >
       <Loading show={loading}></Loading>
       <iframe
         id={id}
         ref={frame}
-        style={{ ...{ flexGrow: 1, display: loading ? "none" : "" }, ...style }}
+        style={{
+          ...{ flexGrow: 1, width: "100%", minHeight: 0, display: loading ? "none" : "" },
+          ...style,
+        }}
         width="100%"
         height="100%"
         frameBorder="0"

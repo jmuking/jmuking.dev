@@ -15,38 +15,60 @@ function Footer() {
         bgcolor: "text.primary",
         color: "common.white",
         px: 2,
-        py: 2,
+        py: { xs: 1, sm: 2 },
       }}
     >
       <Stack
-        direction={{ xs: "column", sm: "row" }}
-        spacing={{ xs: 2, sm: 6 }}
+        direction="row"
+        spacing={{ xs: 1.5, sm: 6 }}
         alignItems="center"
         justifyContent="center"
+        useFlexGap
+        flexWrap="wrap"
+        sx={{ width: "100%" }}
       >
-        <Stack spacing={1} alignItems="center">
-          <Link href={resumePdf} underline="hover" color="primary.main">
+        <Stack
+          spacing={{ xs: 0.25, sm: 1 }}
+          alignItems="center"
+          sx={{ minWidth: { xs: "44%", sm: "auto" } }}
+        >
+          <Link
+            href={resumePdf}
+            underline="hover"
+            color="primary.main"
+            sx={{ fontSize: { xs: "0.85rem", sm: "1rem" }, lineHeight: 1.2 }}
+          >
             {strings.resume}
           </Link>
           <Link
             href={`mailto:${links.email}`}
             underline="hover"
             color="primary.main"
+            sx={{ fontSize: { xs: "0.85rem", sm: "1rem" }, lineHeight: 1.2 }}
           >
             {strings.email}
           </Link>
         </Stack>
 
-        <Stack spacing={1} alignItems="center">
-          <Typography>{strings.byline}</Typography>
-          <Typography>{`©${strings.year}`}</Typography>
-        </Stack>
-
-        <Stack spacing={1} alignItems="center">
-          <Link href={links.github} underline="hover" color="primary.main">
+        <Stack
+          spacing={{ xs: 0.25, sm: 1 }}
+          alignItems="center"
+          sx={{ minWidth: { xs: "44%", sm: "auto" } }}
+        >
+          <Link
+            href={links.github}
+            underline="hover"
+            color="primary.main"
+            sx={{ fontSize: { xs: "0.85rem", sm: "1rem" }, lineHeight: 1.2 }}
+          >
             {strings.github}
           </Link>
-          <Link href={links.itch} underline="hover" color="primary.main">
+          <Link
+            href={links.itch}
+            underline="hover"
+            color="primary.main"
+            sx={{ fontSize: { xs: "0.85rem", sm: "1rem" }, lineHeight: 1.2 }}
+          >
             {strings.itch}
           </Link>
         </Stack>

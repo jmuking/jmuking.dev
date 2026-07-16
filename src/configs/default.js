@@ -46,7 +46,7 @@ export const strings = {
   itch: "itch.io",
   github: "Github",
   email: "email",
-  byline: "created by Jeff King",
+  byline: "Jeff King",
   year: "2022",
 };
 
