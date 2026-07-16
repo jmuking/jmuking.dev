@@ -1,67 +1,32 @@
+import {
+  Alert,
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import { colors, font } from "../configs/default";
+import { colors } from "../configs/default";
 import emailjs, { init } from "@emailjs/browser";
 import { emailjsSettings } from "../configs/default";
-import styled from "styled-components";
 import Loading from "./Other/Loading";
 
 init(emailjsSettings.userId);
 
-const ContactForm = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ContactLabel = styled.label`
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  font-weight: bold;
-  font-size: 16px;
-`;
-
-const ContactInput = styled.input`
-  height: 2rem;
-  margin-top: 0.5rem;
-  font-size: 18px;
-  padding: 0.5rem;
-  font-family: ${font};
-  border-width: 2px;
-  border-style: solid;
-`;
-
-const ContactTextArea = styled.textarea`
-  margin-top: 0.5rem;
-  font-size: 18px;
-  resize: vertical;
-  height: 10rem;
-  line-height: 1.6rem;
-  padding: 0.5rem;
-  font-family: ${font};
-  border-width: 2px;
-`;
-
-const ContactSubmit = styled.input`
-  height: 3rem;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: ${colors.tertiary};
-  color: white;
-  border: 1px solid ${colors.dark};
-  font-family: ${font};
-`;
-
 function Contact() {
   const form = useRef(null);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [validEmail, setValidEmail] = useState(false);
-  const [validName, setValidName] = useState(false);
-  const [validMessage, setValidMessage] = useState(false);
-  const [submitHovering, setSubmitHovering] = useState(false);
   const [validSubmit, setValidSubmit] = useState(false);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const validName = name.trim().length > 0;
+  const validMessage = message.trim().length > 0;
 
   useEffect(() => {
     setValidSubmit(validName && validEmail && validMessage);
@@ -77,7 +42,7 @@ function Contact() {
         emailjsSettings.serviceId,
         emailjsSettings.templateId,
         form.current,
-        emailjsSettings.userId
+        emailjsSettings.userId,
       )
       .then(
         (result) => {
@@ -87,7 +52,7 @@ function Contact() {
         (error) => {
           console.error(error);
           setLoading(false);
-        }
+        },
       );
   };
 
@@ -95,7 +60,7 @@ function Contact() {
     const validate = String(email)
       .toLowerCase()
       .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       );
 
     const validEmail = validate ? email : false;
@@ -103,98 +68,83 @@ function Contact() {
   };
 
   return (
-    <div
-      style={{
-        textAlign: "center",
-      }}
-    >
+    <Box sx={{ textAlign: "center", maxWidth: "40rem", mx: "auto" }}>
       {sent && (
-        <h3>
+        <Alert severity="success" sx={{ mb: 3, alignItems: "center" }}>
           Thank you for the email! I will get back to you shortly &#128512;.
-        </h3>
+        </Alert>
       )}
-      {loading && <Loading show={loading}></Loading>}
+      {loading && <Loading show={loading} />}
       {!sent && !loading && (
-        <ContactForm ref={form} onSubmit={sendEmail}>
-          <ContactLabel>
-            <div>
-              <span>Name </span>
-              <span style={{ color: colors.invalid }}>*</span>
-            </div>
-            <ContactInput
-              type="text"
+        <Box component="form" ref={form} onSubmit={sendEmail}>
+          <Stack spacing={3}>
+            <TextField
+              label="Name *"
               name="name"
               placeholder="Joe Mama"
-              value={validName || null}
+              value={name}
+              error={!validName}
+              helperText={!validName ? "Required" : " "}
+              fullWidth
               onChange={(evt) => {
-                setValidName(evt.target.value);
+                setName(evt.target.value);
               }}
-              style={{
-                borderColor: validName ? "" : colors.invalid,
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
               }}
-            ></ContactInput>
-          </ContactLabel>
-          <ContactLabel>
-            <div>
-              <span>Email </span>
-              <span style={{ color: colors.invalid }}>*</span>
-            </div>
-            <ContactInput
+            />
+            <TextField
+              label="Email *"
               type="email"
               name="email"
               placeholder="joe.mama@gmail.com"
-              value={validEmail || null}
+              value={email}
+              error={!validEmail}
+              helperText={!validEmail ? "Enter a valid email" : " "}
+              fullWidth
               onChange={(evt) => {
+                setEmail(evt.target.value);
                 validateEmail(evt.target.value);
               }}
-              style={{
-                borderColor: validEmail ? "" : colors.invalid,
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
               }}
             />
-          </ContactLabel>
-          <ContactLabel>
-            <div>
-              <span>Message </span>
-              <span style={{ color: colors.invalid }}>*</span>
-            </div>
-            <ContactTextArea
+            <TextField
+              label="Message *"
               name="message"
               placeholder="Have you ever heard of my friend Joe?"
-              value={validMessage || null}
+              value={message}
+              error={!validMessage}
+              helperText={!validMessage ? "Required" : " "}
+              fullWidth
+              multiline
+              minRows={6}
               onChange={(evt) => {
-                setValidMessage(evt.target.value);
-              }}
-              style={{
-                borderColor: validMessage ? "" : colors.invalid,
+                setMessage(evt.target.value);
               }}
             />
-          </ContactLabel>
-          <ContactSubmit
-            type="submit"
-            disabled={!validSubmit}
-            value="Send"
-            onMouseEnter={() => {
-              setSubmitHovering(true);
-            }}
-            onMouseLeave={() => {
-              setSubmitHovering(false);
-            }}
-            style={{
-              backgroundColor: !validSubmit
-                ? colors.invalidBg
-                : submitHovering
-                ? colors.other1
-                : colors.tertiary,
-              color: !validSubmit ? colors.dark : "white",
-              cursor: !validSubmit ? "not-allowed" : "pointer",
-            }}
-          ></ContactSubmit>
-          <p style={{ color: colors.invalid, textAlign: "left" }}>
-            * = required
-          </p>
-        </ContactForm>
+            <Button
+              type="submit"
+              disabled={!validSubmit}
+              variant="contained"
+              color="secondary"
+              size="large"
+              sx={{ py: 1.25 }}
+            >
+              Send
+            </Button>
+            <Typography sx={{ color: colors.invalid, textAlign: "left" }}>
+              * = required
+            </Typography>
+          </Stack>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
 

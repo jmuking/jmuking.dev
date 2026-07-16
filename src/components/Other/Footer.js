@@ -1,59 +1,57 @@
-import { colors, links, strings } from "../../configs/default";
+import { Box, Link, Stack, Typography } from "@mui/material";
+import { links, strings } from "../../configs/default";
 import resumePdf from "../../resources/Resume.pdf";
-import styled from "styled-components";
-
-const spacingStyle = {
-  marginLeft: "1rem",
-  marginRight: "1rem",
-  marginTop: "1rem",
-  marginBottom: "0",
-  textAlign: "center",
-};
-
-const aFooterStyle = { ...spacingStyle, ...{ color: colors.primary } };
-
-const FooterColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 function Footer() {
   return (
-    <div
-      style={{
-        paddingTop: "0.5rem",
-        paddingBottom: "0.8rem",
+    <Box
+      component="footer"
+      sx={{
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        borderTop: `1px solid ${colors.dark}`,
-        background: colors.dark,
-        color: "white",
-        zIndex: 1,
+        borderTop: "1px solid",
+        borderColor: "divider",
+        bgcolor: "text.primary",
+        color: "common.white",
+        px: 2,
+        py: 2,
       }}
     >
-      <FooterColumn>
-        <a href={resumePdf} style={aFooterStyle}>
-          {strings.resume}
-        </a>
-        <a href={`mailto:${links.email}`} style={aFooterStyle}>
-          {strings.email}
-        </a>
-      </FooterColumn>
-      <FooterColumn>
-        <p style={spacingStyle}>{strings.byline}</p>
-        <p style={spacingStyle}>&#169;{strings.year}</p>
-      </FooterColumn>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 2, sm: 6 }}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Stack spacing={1} alignItems="center">
+          <Link href={resumePdf} underline="hover" color="primary.main">
+            {strings.resume}
+          </Link>
+          <Link
+            href={`mailto:${links.email}`}
+            underline="hover"
+            color="primary.main"
+          >
+            {strings.email}
+          </Link>
+        </Stack>
 
-      <FooterColumn>
-        <a href={links.github} style={aFooterStyle}>
-          {strings.github}
-        </a>
-        <a href={links.itch} style={aFooterStyle}>
-          {strings.itch}
-        </a>
-      </FooterColumn>
-    </div>
+        <Stack spacing={1} alignItems="center">
+          <Typography>{strings.byline}</Typography>
+          <Typography>{`©${strings.year}`}</Typography>
+        </Stack>
+
+        <Stack spacing={1} alignItems="center">
+          <Link href={links.github} underline="hover" color="primary.main">
+            {strings.github}
+          </Link>
+          <Link href={links.itch} underline="hover" color="primary.main">
+            {strings.itch}
+          </Link>
+        </Stack>
+      </Stack>
+    </Box>
   );
 }
 

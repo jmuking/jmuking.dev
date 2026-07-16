@@ -1,18 +1,20 @@
+import { Box } from "@mui/material";
 import loadingGif from "../../resources/loading.gif";
 
 function Loading({ show }) {
   return (
-    <img
+    <Box
+      component="img"
       src={loadingGif}
       alt="loading"
-      width="100px"
-      height="100px"
-      style={{
-        display: show ? "" : "none",
+      sx={{
+        display: show ? "block" : "none",
         justifySelf: "center",
         alignSelf: "center",
+        width: 100,
+        height: 100,
       }}
-    ></img>
+    />
   );
 }
 

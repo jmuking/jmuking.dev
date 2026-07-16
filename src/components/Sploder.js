@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { Box, Typography } from "@mui/material";
 import SploderItem from "./Sploder/SploderItem";
 import React, { useEffect, useState } from "react";
 import { sploderMaps } from "../configs/default";
@@ -51,22 +51,6 @@ const oppositeDirection = (dir) => {
   }
 };
 
-const SploderTable = styled.table`
-  height: 100%;
-`;
-
-const SploderRow = styled.tr``;
-
-const InfoText = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-`;
-
-const GoalText = styled.div`
-  font-size: 14px;
-  line-height: 1.6;
-`;
-
 function Sploder() {
   const buildMap = (round) => {
     return JSON.parse(JSON.stringify(sploderMaps[round]));
@@ -89,7 +73,7 @@ function Sploder() {
     setGameClock(
       setInterval(() => {
         if (playing) setTurn(++x);
-      }, 1000)
+      }, 1000),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing]);
@@ -262,61 +246,69 @@ function Sploder() {
   };
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         display: "flex",
         flexDirection: "column",
-        height: "50rem",
         width: "100%",
         alignSelf: "center",
-        maxWidth: "calc(100vh - 20rem)",
+        maxWidth: "42rem",
+        mx: "auto",
       }}
     >
-      <div style={{ marginBottom: "1rem" }}>
-        <div
-          style={{
+      <Box sx={{ mb: 2 }}>
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
-            marginBottom: "1rem",
+            alignItems: "center",
+            gap: 2,
+            mb: 2,
           }}
         >
-          <InfoText>Turn: {turn}</InfoText>
-          <InfoText style={{ fontSize: "14px" }}>
+          <Typography fontWeight={700} fontSize="1.25rem">
+            Turn: {turn}
+          </Typography>
+          <Typography fontWeight={700} fontSize="0.95rem" textAlign="center">
             {win ? (win === WIN ? "You win!" : "You lose! Try again!") : ""}
-          </InfoText>
-          <InfoText>Round: {round}</InfoText>
-        </div>
-        <GoalText>
+          </Typography>
+          <Typography fontWeight={700} fontSize="1.25rem">
+            Round: {round}
+          </Typography>
+        </Box>
+        <Typography fontSize="0.95rem" lineHeight={1.7}>
           Land your splosion on the green blocks on turn {turnGoal}. By clicking
           on a purple block, you can trigger a splosion. blue blocks will
           reflect your splosion.
-        </GoalText>
-      </div>
-      <SploderTable>
-        <tbody>
-          {sploderBoard.map((sploderRow, y) => {
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${sploderBoard[0].length}, minmax(0, 1fr))`,
+          gap: "0.2rem",
+          width: "100%",
+          aspectRatio: "1 / 1",
+          alignSelf: "center",
+        }}
+      >
+        {sploderBoard.map((sploderRow, y) => {
+          return sploderRow.map((sploderItem, x) => {
             return (
-              <SploderRow key={y}>
-                {sploderRow.map((sploderItem, x) => {
-                  return (
-                    <SploderItem
-                      key={`${x},${y}(${sploderItem})`}
-                      x={x}
-                      y={y}
-                      itemType={sploderItem}
-                      onClick={() => {
-                        if (sploderItem === 0 && !playing)
-                          triggerSplosion(x, y);
-                      }}
-                    ></SploderItem>
-                  );
-                })}
-              </SploderRow>
+              <SploderItem
+                key={`${x},${y}(${sploderItem})`}
+                x={x}
+                y={y}
+                itemType={sploderItem}
+                onClick={() => {
+                  if (sploderItem === 0 && !playing) triggerSplosion(x, y);
+                }}
+              />
             );
-          })}
-        </tbody>
-      </SploderTable>
-    </div>
+          });
+        })}
+      </Box>
+    </Box>
   );
 }
 

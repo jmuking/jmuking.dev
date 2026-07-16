@@ -76,9 +76,9 @@ export const colors = {
 export const font = "JetBrains Mono";
 
 export const emailjsSettings = {
-  serviceId: process.env.REACT_APP_EMAILJS_SERVICE_ID,
-  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-  userId: process.env.REACT_APP_EMAILJS_USER_ID,
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  userId: import.meta.env.VITE_EMAILJS_USER_ID,
 };
 
 export const sploderMaps = [

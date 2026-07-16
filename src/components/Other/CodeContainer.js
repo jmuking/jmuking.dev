@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { colors, links } from "../../configs/default";
+import { links } from "../../configs/default";
 import { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 
@@ -8,18 +8,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import Loading from "../Other/Loading";
-
-const CodeContent = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2rem;
-  flex-grow: 1;
-  background: ${colors.light};
-  z-index: 1;
-`;
 
 function CodeContainer() {
   const location = useLocation();
@@ -40,7 +28,7 @@ function CodeContainer() {
         (response) => response.json(),
         (error) => {
           console.error(error);
-        }
+        },
       )
       .then(
         (data) => {
@@ -51,19 +39,30 @@ function CodeContainer() {
         (error) => {
           console.error(error);
           setLoading(false);
-        }
+        },
       );
   }, [location]);
 
   return (
-    <CodeContent>
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        overflowY: "auto",
+        overflowX: "hidden",
+        p: 2,
+        bgcolor: "background.paper",
+        boxSizing: "border-box",
+      }}
+    >
       <Loading show={loading} />
       {!loading && (
         <SyntaxHighlighter language="javascript" style={materialDark}>
           {codeContent}
         </SyntaxHighlighter>
       )}
-    </CodeContent>
+    </Box>
   );
 }
 

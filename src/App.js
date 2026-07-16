@@ -1,80 +1,49 @@
 import "./App.css";
 
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import {
+  Box,
+  Container,
+  IconButton,
+  Paper,
+  Stack,
+  Tooltip,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import CloseFullscreenRoundedIcon from "@mui/icons-material/CloseFullscreenRounded";
+import CodeOffRoundedIcon from "@mui/icons-material/CodeOffRounded";
+import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import OpenInFullRoundedIcon from "@mui/icons-material/OpenInFullRounded";
 import React, { useEffect, useState } from "react";
-import Header from "./components/Other/Header";
-import Footer from "./components/Other/Footer";
-import Home from "./components/Home";
 import About from "./components/About";
+import Chill from "./components/Chill";
+import Contact from "./components/Contact";
+import Home from "./components/Home";
+import CodeContainer from "./components/Other/CodeContainer";
+import Footer from "./components/Other/Footer";
+import Header from "./components/Other/Header";
+import Penguins from "./components/Penguins";
 import Play from "./components/Play";
 import Sploder from "./components/Sploder";
-import CodeContainer from "./components/Other/CodeContainer";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { colors, headerTabs } from "./configs/default";
-import styled from "styled-components";
-import Contact from "./components/Contact";
-import Penguins from "./components/Penguins";
-import Chill from "./components/Chill";
-import VibButton from "./components/Other/VibButton";
-
-import expandPng from "./resources/expand.png";
-import contractPng from "./resources/contract.png";
-import inspectPng from "./resources/inspect.png";
-import inspectOpenPng from "./resources/inspect-open.png";
-
-const AppContainer = styled.div`
-  color: ${colors.dark};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0;
-  height: 100%;
-  width: 100%;
-  overflow-y: auto;
-`;
-
-const ContentContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  padding: 2rem;
-  background: ${colors.light};
-  z-index: 1;
-`;
-
-const ParentContentContainer = styled.div`
-  width: 100%;
-  display: flex;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: 1px solid ${colors.dark};
-  background: ${colors.light};
-  transition: max-height 2s, max-width 2s, ease 0.5s;
-`;
-
-const SpaceFiller = styled.div`
-  flex-grow: 1;
-`;
+import { headerTabs } from "./configs/default";
 
 function App() {
+  const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
   const [codeSpy, setCodeSpy] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   const [expanded, setExpanded] = useState(false);
-  const [isTinyMobile, setIsTinyMobile] = useState(window.innerWidth <= 450);
-
-  const listenToWindow = () => {
-    const newIsMobile = window.innerWidth <= 900;
-    if (newIsMobile) setExpanded(newIsMobile);
-    setIsMobile(newIsMobile);
-    setIsTinyMobile(window.innerWidth <= 490);
-  };
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTinyMobile = useMediaQuery("(max-width:490px)");
 
   useEffect(() => {
-    window.addEventListener("resize", listenToWindow);
-  }, []);
+    if (isMobile) {
+      setExpanded(true);
+      setCodeSpy(false);
+    }
+  }, [isMobile]);
 
   useEffect(() => {
     const validRoutes = headerTabs.map((headerTab) => {
@@ -83,84 +52,183 @@ function App() {
     if (!validRoutes.includes(location.pathname)) navigate("/");
   }, [location, navigate]);
 
+  const maxWidth = isMobile
+    ? "100%"
+    : expanded
+      ? "calc(100% - 2rem)"
+      : codeSpy
+        ? "94%"
+        : "56rem";
+
   return (
-    <>
-      <AppContainer>
-        <Header isMobile={isMobile} isTinyMobile={isTinyMobile}></Header>
-        <ParentContentContainer
-          style={{
-            justifyContent: codeSpy ? "space-between" : "",
-            marginTop: isMobile ? 0 : "1rem",
-            marginBottom: isMobile ? 0 : "1rem",
-            maxWidth: expanded
-              ? isMobile
-                ? "100%"
-                : "calc(100% - 4rem)"
-              : codeSpy
-              ? "min(100rem, 90%)"
-              : "50rem",
-            maxHeight: isMobile || expanded ? "100%" : "",
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        color: "text.primary",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Header isMobile={isMobile} isTinyMobile={isTinyMobile} />
+        <Container
+          maxWidth={false}
+          sx={{
+            py: { xs: 0, md: 2 },
+            px: { xs: 0, md: 2 },
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            minHeight: 0,
+            flexGrow: 1,
+            overflow: "hidden",
           }}
         >
-          {!isMobile && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: "1rem",
-                paddingTop: "1rem",
-                background: colors.dark,
-                borderRight: `1px solid ${colors.dark}`,
-              }}
-            >
-              <VibButton
-                src={inspectPng}
-                toggledSrc={inspectOpenPng}
-                onToggled={setCodeSpy}
-                style={{
-                  height: "2rem",
-                  marginBottom: "2rem",
-                }}
-              ></VibButton>
-              <VibButton
-                src={expandPng}
-                toggledSrc={contractPng}
-                onToggled={(toggled) => {
-                  setExpanded(toggled);
-                }}
-                style={{
-                  height: "2rem",
-                }}
-                initToggled={expanded}
-              ></VibButton>
-            </div>
-          )}
-
-          <div
-            style={{
+          <Paper
+            elevation={8}
+            sx={{
+              width: "100%",
+              maxWidth,
               display: "flex",
-              flexGrow: 1,
-              width: "calc(100% - 65px)",
+              minHeight: 0,
+              overflow: "hidden",
+              border: "1px solid",
+              borderColor: "divider",
+              borderRadius: 0,
+              transition: theme.transitions.create(
+                ["max-width", "box-shadow"],
+                {
+                  duration: theme.transitions.duration.standard,
+                  easing: theme.transitions.easing.easeInOut,
+                },
+              ),
+              willChange: "max-width",
             }}
           >
-            <ContentContainer>
-              <Routes>
-                <Route path="/" element={<Home></Home>}></Route>
-                <Route path="/about" element={<About></About>}></Route>
-                <Route path="/contact" element={<Contact></Contact>}></Route>
-                <Route path="/chill" element={<Chill></Chill>}></Route>
-                <Route path="/play" element={<Play></Play>}></Route>
-                <Route path="/penguins" element={<Penguins></Penguins>}></Route>
-                <Route path="/sploder" element={<Sploder></Sploder>}></Route>
-              </Routes>
-            </ContentContainer>
-            {codeSpy && <CodeContainer></CodeContainer>}
-          </div>
-        </ParentContentContainer>
-        <SpaceFiller></SpaceFiller>
-        <Footer></Footer>
-      </AppContainer>
-    </>
+            {!isMobile && (
+              <Stack
+                spacing={2}
+                sx={{
+                  p: 1.5,
+                  bgcolor: "text.primary",
+                  borderRight: "1px solid",
+                  borderColor: "divider",
+                }}
+              >
+                <Tooltip
+                  title={codeSpy ? "Hide code panel" : "Show code panel"}
+                >
+                  <IconButton
+                    onClick={() => {
+                      setCodeSpy((current) => !current);
+                    }}
+                    sx={{
+                      color: codeSpy ? "primary.main" : "common.white",
+                      bgcolor: codeSpy
+                        ? "rgba(121, 180, 115, 0.18)"
+                        : "transparent",
+                    }}
+                  >
+                    {codeSpy ? <CodeOffRoundedIcon /> : <CodeRoundedIcon />}
+                  </IconButton>
+                </Tooltip>
+                <Tooltip
+                  title={expanded ? "Constrain layout" : "Expand layout"}
+                >
+                  <IconButton
+                    onClick={() => {
+                      setExpanded((current) => !current);
+                    }}
+                    sx={{
+                      color: expanded ? "primary.main" : "common.white",
+                      bgcolor: expanded
+                        ? "rgba(121, 180, 115, 0.18)"
+                        : "transparent",
+                    }}
+                  >
+                    {expanded ? (
+                      <CloseFullscreenRoundedIcon />
+                    ) : (
+                      <OpenInFullRoundedIcon />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+            )}
+
+            <Box
+              sx={{
+                display: "flex",
+                flexGrow: 1,
+                minWidth: 0,
+                minHeight: 0,
+                overflow: "hidden",
+              }}
+            >
+              <Box
+                component="main"
+                sx={{
+                  flex: 1,
+                  minWidth: 0,
+                  minHeight: 0,
+                  p: { xs: 2, sm: 3, md: 4 },
+                  bgcolor: "background.paper",
+                  overflowY: "auto",
+                  overflowX: "hidden",
+                  transition: theme.transitions.create(["padding"], {
+                    duration: theme.transitions.duration.standard,
+                    easing: theme.transitions.easing.easeInOut,
+                  }),
+                }}
+              >
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/chill" element={<Chill />} />
+                  <Route path="/play" element={<Play />} />
+                  <Route path="/penguins" element={<Penguins />} />
+                  <Route path="/sploder" element={<Sploder />} />
+                </Routes>
+              </Box>
+              {!isMobile && (
+                <Box
+                  sx={{
+                    width: codeSpy ? "min(42rem, 42vw)" : 0,
+                    minHeight: 0,
+                    opacity: codeSpy ? 1 : 0,
+                    overflow: "auto",
+                    borderLeft: codeSpy ? "1px solid" : "0 solid",
+                    borderColor: "divider",
+                    transition: theme.transitions.create(
+                      ["width", "opacity", "border-left-width"],
+                      {
+                        duration: theme.transitions.duration.standard,
+                        easing: theme.transitions.easing.easeInOut,
+                      },
+                    ),
+                  }}
+                >
+                  <CodeContainer />
+                </Box>
+              )}
+            </Box>
+          </Paper>
+        </Container>
+        <Box sx={{ mt: "auto", width: "100%" }}>
+          <Footer />
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

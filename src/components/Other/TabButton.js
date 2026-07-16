@@ -1,46 +1,54 @@
-import React, { useState } from "react";
-import { colors, font } from "../../configs/default";
+import { Button } from "@mui/material";
+import React from "react";
 
 function TabButton({ active, text, onClick, isMobile }) {
-  const [hovering, setHovering] = useState(false);
+  const desktopStyles = isMobile
+    ? {}
+    : {
+        minHeight: "2.5rem",
+        borderWidth: 0,
+        borderRadius: 0,
+        color: "text.primary",
+        bgcolor: "transparent",
+        boxShadow: "none",
+        borderBottom: "3px solid",
+        borderBottomColor: active ? "text.primary" : "transparent",
+        fontSize: "0.95rem",
+        fontWeight: active ? 700 : 500,
+        "&:hover": {
+          borderColor: "transparent",
+          borderBottomColor: "text.primary",
+          bgcolor: "rgba(51, 51, 47, 0.08)",
+        },
+      };
 
   return (
-    <button
+    <Button
       onClick={onClick}
-      onMouseEnter={() => {
-        setHovering(true);
-      }}
-      onMouseLeave={() => {
-        setHovering(false);
-      }}
-      style={{
-        background: active
-          ? colors.primary
-          : hovering
-          ? colors.other2
-          : colors.dark,
-        color: active ? colors.dark : "white",
-        paddingLeft: "2rem",
-        paddingRight: "2rem",
+      disableElevation
+      variant={isMobile ? (active ? "contained" : "outlined") : "text"}
+      sx={{
+        px: 3,
         textAlign: "center",
-        border: `1px solid ${colors.dark}`,
-        height: active && !isMobile ? "100%" : !isMobile ? "80%" : "4rem",
-        fontWeight: active ? "bold" : "normal",
-        fontSize: active ? "18px" : "14px",
+        borderWidth: 1,
+        minHeight: isMobile ? "3rem" : "2.75rem",
+        fontSize: active ? "1rem" : "0.92rem",
         cursor: active ? "auto" : "pointer",
-        borderTop: isMobile ? `2px solid ${colors.dark}` : "0",
-        fontFamily: font,
-        zIndex: 100,
-        margin: 0,
-        boxShadow: active
-          ? !isMobile
-            ? `3px 3px 2px 0 ${colors.dark}`
-            : `0px 3px 2px 0 ${colors.dark}`
-          : "none",
+        justifyContent: isMobile ? "flex-start" : "center",
+        borderColor: "text.primary",
+        color: active ? "text.primary" : "common.white",
+        bgcolor: active ? "primary.main" : "text.primary",
+        boxShadow: active ? 3 : 0,
+        width: isMobile ? "100%" : "auto",
+        "&:hover": {
+          borderColor: "text.primary",
+          bgcolor: active ? "primary.dark" : "secondary.main",
+        },
+        ...desktopStyles,
       }}
     >
       {text}
-    </button>
+    </Button>
   );
 }
 

@@ -1,5 +1,5 @@
-import { colors, sploder } from "../../configs/default";
-import styled from "styled-components";
+import { Box } from "@mui/material";
+import { colors } from "../../configs/default";
 
 const COLOR_MAPPINGS = [
   colors.other2,
@@ -11,14 +11,18 @@ const COLOR_MAPPINGS = [
   colors.gold,
 ];
 
-const SploderCell = styled.td``;
-
 function SploderItem({ x, y, itemType, onClick }) {
   return (
-    <SploderCell
-      style={{ backgroundColor: COLOR_MAPPINGS[itemType] }}
+    <Box
+      sx={{
+        backgroundColor: COLOR_MAPPINGS[itemType],
+        width: "100%",
+        height: "100%",
+        aspectRatio: "1 / 1",
+        cursor: itemType === 0 ? "pointer" : "default",
+      }}
       onClick={onClick}
-    ></SploderCell>
+    />
   );
 }
 

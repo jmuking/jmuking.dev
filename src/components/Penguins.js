@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
 import Loading from "./Other/Loading";
@@ -11,6 +12,7 @@ const songs = [song1, song2, song3, song4, song5];
 
 function Penguins() {
   const penguins = useRef(null);
+  const playerContainer = useRef(null);
 
   const [audio, setAudio] = useState(null);
   const [songIndex, setSongIndex] = useState(0);
@@ -50,38 +52,69 @@ function Penguins() {
   };
 
   return (
-    <div
+    <Box
       ref={penguins}
-      style={{
+      sx={{
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        gap: 1,
+        width: "100%",
+        height: "100%",
+        minHeight: 0,
+        overflow: "hidden",
       }}
     >
-      <Loading show={loading}></Loading>
-      <YouTube
-        videoId={process.env.REACT_APP_PENGUIN_LIVESTREAM_ID}
-        title={"Penguins Time"}
-        onReady={(event) => {
-          const ytFrame = penguins.current?.children[1];
-          ytFrame.style.height = "100%";
-          ytFrame.style.width = "100%";
-          setLoading(false);
-          setYt(event.target);
+      <Loading show={loading} />
+      <Box
+        ref={playerContainer}
+        sx={{
+          width: "100%",
+          flex: 1,
+          minHeight: 0,
+          overflow: "hidden",
+          display: "flex",
+          "& .penguins-player": {
+            width: "100%",
+            height: "100%",
+            display: "flex",
+          },
+          "& .penguins-player-frame": {
+            width: "100%",
+            height: "100%",
+            border: 0,
+            display: "block",
+          },
         }}
-        onPlay={startAudio}
-        onPause={stopAudio}
-        onEnd={stopAudio}
-        opts={{ height: "100%", width: "100%", autoPlay: 1 }}
-      ></YouTube>
-      <p style={{ textAlign: "left", fontSize: 10 }}>
+      >
+        <YouTube
+          className="penguins-player"
+          iframeClassName="penguins-player-frame"
+          videoId={import.meta.env.VITE_PENGUIN_LIVESTREAM_ID}
+          title={"Penguins Time"}
+          onReady={(event) => {
+            const ytFrame = playerContainer.current?.querySelector("iframe");
+            if (ytFrame) {
+              ytFrame.style.height = "100%";
+              ytFrame.style.width = "100%";
+            }
+            setLoading(false);
+            setYt(event.target);
+          }}
+          onPlay={startAudio}
+          onPause={stopAudio}
+          onEnd={stopAudio}
+          opts={{ height: "100%", width: "100%", autoPlay: 1 }}
+        />
+      </Box>
+      <Typography
+        sx={{ textAlign: "left", fontSize: 10, width: "100%", mb: 0 }}
+      >
         All songs you hear on this page are created by{" "}
         <a href="https://soundcloud.com/barradeen">Barradeen</a>
-      </p>
-    </div>
+      </Typography>
+    </Box>
   );
 }
 

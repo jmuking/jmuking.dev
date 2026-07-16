@@ -1,143 +1,127 @@
-import React, { useState, useEffect } from "react";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import {
+  AppBar,
+  Box,
+  Collapse,
+  IconButton,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { colors, strings, headerTabs } from "../../configs/default";
-import styled from "styled-components";
+import { strings, headerTabs } from "../../configs/default";
 import TabButton from "../Other/TabButton";
-
-import menuPng from "../../resources/menu.png";
-import menuOpenPng from "../../resources/menu-open.png";
-import VibButton from "./VibButton";
-
-const Title = styled.h1`
-  color: ${colors.dark};
-  background-color: ${colors.primary};
-  margin-bottom: 0;
-  margin-top: 0;
-`;
-
-const HeaderBackground = styled.div`
-  color: ${colors.dark};
-  background-color: ${colors.primary};
-  padding: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 99;
-  box-shadow: 0 3px 3px 2px ${colors.dark};
-`;
-
-const Navigator = styled.div`
-  display: flex;
-  justify-content: left;
-  height: 4rem;
-  margin-left: 2rem;
-`;
-
-const MobileNavigator = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem;
-  margin-left: 0;
-  height: auto;
-  width: 100%;
-`;
 
 function Header({ isMobile, isTinyMobile }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //600,4
   const [menuOpen, setMenuOpen] = useState(false);
+  const titleEmojis = `${String.fromCodePoint(0x1f3ae)} ${String.fromCodePoint(0x1f427)} ${String.fromCodePoint(0x1f6b4)}`;
 
-  const renderNavigator = () => {
-    if (isMobile && menuOpen)
-      return (
-        <MobileNavigator>
-          {headerTabs.map((headerTab, index) => {
-            return (
+  const title = isTinyMobile
+    ? strings.title
+    : `${strings.title} ${titleEmojis}`;
+
+  return (
+    <Box sx={{ width: "100%", position: "sticky", top: 0, zIndex: 10 }}>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          bgcolor: "primary.main",
+          color: "text.primary",
+          borderBottom: "1px solid",
+          borderColor: "divider",
+          boxShadow: "0 10px 24px rgba(51, 51, 47, 0.18)",
+        }}
+      >
+        <Toolbar
+          sx={{
+            px: { xs: 2, sm: 3, md: 4 },
+            py: 1,
+            minHeight: "unset",
+            gap: 2,
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Typography
+              variant={isMobile ? "h5" : "h4"}
+              component="h1"
+              sx={{ lineHeight: 1.1, wordBreak: "break-word" }}
+            >
+              {title}
+            </Typography>
+          </Box>
+          {isMobile ? (
+            <IconButton
+              onClick={() => {
+                setMenuOpen((current) => !current);
+              }}
+              aria-label="Toggle navigation"
+              sx={{ color: "text.primary" }}
+            >
+              {menuOpen ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
+            </IconButton>
+          ) : null}
+        </Toolbar>
+
+        {!isMobile ? (
+          <Stack
+            direction="row"
+            spacing={0.5}
+            sx={{
+              px: 4,
+              pb: 1,
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+              alignItems: "flex-end",
+            }}
+          >
+            {headerTabs.map((headerTab) => (
               <TabButton
-                key={index}
+                key={headerTab[1]}
+                text={headerTab[0]}
+                active={location.pathname === headerTab[1]}
+                onClick={() => {
+                  navigate(headerTab[1]);
+                }}
+              />
+            ))}
+          </Stack>
+        ) : null}
+      </AppBar>
+
+      {isMobile ? (
+        <Collapse in={menuOpen} timeout="auto" unmountOnExit>
+          <Stack
+            spacing={1}
+            sx={{
+              p: 2,
+              bgcolor: "background.paper",
+              borderBottom: "1px solid",
+              borderColor: "divider",
+            }}
+          >
+            {headerTabs.map((headerTab) => (
+              <TabButton
+                key={headerTab[1]}
                 text={headerTab[0]}
                 isMobile={isMobile}
                 active={location.pathname === headerTab[1]}
                 onClick={() => {
-                  setMenuOpen(!menuOpen);
+                  setMenuOpen(false);
                   navigate(headerTab[1]);
                 }}
-              ></TabButton>
-            );
-          })}
-        </MobileNavigator>
-      );
-    else if (!isMobile)
-      return (
-        <Navigator>
-          {headerTabs.map((headerTab, index) => {
-            return (
-              <TabButton
-                key={index}
-                text={headerTab[0]}
-                active={location.pathname === headerTab[1]}
-                onClick={() => {
-                  navigate(headerTab[1]);
-                }}
-              ></TabButton>
-            );
-          })}
-        </Navigator>
-      );
-  };
-
-  const renderMenuButton = () => {
-    if (isMobile)
-      return (
-        <VibButton
-          src={menuPng}
-          toggledSrc={menuOpenPng}
-          onToggled={(toggled) => {
-            setMenuOpen(toggled);
-          }}
-          initToggled={menuOpen}
-          style={{ height: "2rem" }}
-        ></VibButton>
-      );
-    else return "";
-  };
-
-  const renderTitle = () => {
-    if (isTinyMobile) return <Title>{strings.title}</Title>;
-    else if (isMobile)
-      return <Title>{strings.title} &#127918; &#128039; &#128692;</Title>;
-    else
-      return (
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Title>{strings.title} &#127918; &#128039; &#128692;</Title>
-        </div>
-      );
-  };
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
-      <HeaderBackground>
-        {renderTitle()}
-        {renderMenuButton()}
-      </HeaderBackground>
-      {renderNavigator()}
-    </div>
+              />
+            ))}
+          </Stack>
+        </Collapse>
+      ) : null}
+    </Box>
   );
 }
 

@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@emailjs/browser": "^4.4.1",
     "@fontsource/jetbrains-mono": "^5.2.8",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material": "^7.2.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
@@ -14,24 +18,23 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.14.2",
-    "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^16.1.1",
     "react-youtube": "^10.1.0",
-    "styled-components": "^6.4.1",
     "web-vitals": "^5.2.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "netlify deploy --prod"
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "jsdom": "^26.1.0",
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "deploy": "netlify deploy --prod"
   },
   "browserslist": {
     "production": [

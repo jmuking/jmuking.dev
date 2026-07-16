@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
+import React, { useState } from "react";
 import { games } from "../configs/default";
 import GameFrame from "./Frame/GameFrame";
 import Loading from "./Other/Loading";
@@ -6,28 +7,21 @@ import Loading from "./Other/Loading";
 import jeffMonke from "../resources/jeff-monke.gif";
 import samMonke from "../resources/sam-monke.gif";
 import monke from "../resources/monke-nomonkey.png";
-import styled from "styled-components";
-
-const MonkeImg = styled.img`
-  min-width: 0.5rem;
-  min-height: 0.5rem;
-`;
 
 function Play() {
   const [loaded, setLoaded] = useState([]);
   const [loading, setLoading] = useState(true);
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        height: "100%",
       }}
     >
-      <Loading show={loading}></Loading>
+      <Loading show={loading} />
       {games.map((game, index) => {
         return (
           <GameFrame
@@ -41,21 +35,61 @@ function Play() {
               setLoaded(newLoaded);
               if (newLoaded.length >= games.length) setLoading(false);
             }}
-          ></GameFrame>
+          />
         );
       })}
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
           width: "100%",
           justifyContent: "space-between",
+          alignItems: "flex-end",
+          gap: 2,
+          overflow: "hidden",
+          flexWrap: "wrap",
         }}
       >
-        <MonkeImg src={jeffMonke} alt="Jeff" height="75rem"></MonkeImg>
-        <MonkeImg src={monke} alt="monke" height="150rem"></MonkeImg>
-        <MonkeImg src={samMonke} alt="Sam" height="75rem"></MonkeImg>
-      </div>
-    </div>
+        <Box
+          component="img"
+          src={jeffMonke}
+          alt="Jeff"
+          sx={{
+            display: "block",
+            width: { xs: "30%", md: "22%" },
+            minWidth: 72,
+            maxWidth: 220,
+            height: "auto",
+            objectFit: "contain",
+          }}
+        />
+        <Box
+          component="img"
+          src={monke}
+          alt="monke"
+          sx={{
+            display: "block",
+            width: { xs: "36%", md: "28%" },
+            minWidth: 96,
+            maxWidth: 320,
+            height: "auto",
+            objectFit: "contain",
+          }}
+        />
+        <Box
+          component="img"
+          src={samMonke}
+          alt="Sam"
+          sx={{
+            display: "block",
+            width: { xs: "30%", md: "22%" },
+            minWidth: 72,
+            maxWidth: 220,
+            height: "auto",
+            objectFit: "contain",
+          }}
+        />
+      </Box>
+    </Box>
   );
 }
 

@@ -33,9 +33,11 @@ function About() {
               src={photo.src}
               alt={`${index}`}
               style={{
-                aspectRatio: 1,
+                display: "block",
+                width: "100%",
                 maxWidth: "100%",
-                height: "fit-content",
+                height: "auto",
+                objectFit: "contain",
                 marginTop: "1rem",
                 borderRadius: "5%",
               }}

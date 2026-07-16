@@ -1,38 +1,45 @@
+import { Box, Typography } from "@mui/material";
 import meJpg from "../resources/me.jpg";
 
 function Home() {
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        height: "100%",
       }}
     >
-      <h2 style={{ marginTop: 0 }}>Code Slinger</h2>
-      <div style={{ height: "calc(100% - 32px)" }}>
-        <img
+      <Typography variant="h4" component="h2" sx={{ mt: 0, mb: 3 }}>
+        Code Slinger
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "center", md: "flex-start" },
+          gap: 4,
+          width: "100%",
+        }}
+      >
+        <Box
+          component="img"
           src={meJpg}
           alt="me"
-          width="100%"
-          style={{
-            display: "block",
+          sx={{
             maxWidth: "min(50%, 2651px)",
-            maxHeight: "min(70%, 2388px)",
-            width: "auto",
+            width: { xs: "100%", md: "min(22rem, 40%)" },
             height: "auto",
-            float: "left",
-            marginRight: "2rem",
-            marginBottom: "2rem",
             borderRadius: "5%",
           }}
-        ></img>
-        <p
-          style={{
+        />
+        <Typography
+          component="p"
+          sx={{
             lineHeight: "1.8",
-            marginTop: 0,
-            marginBottom: 0,
+            mt: 0,
+            mb: 0,
+            flex: 1,
           }}
         >
           I am a software engineer who works mainly on the front end. A lot of
@@ -43,9 +50,9 @@ function Home() {
             <b>Target</b>
           </a>
           .
-        </p>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 
