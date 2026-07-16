@@ -19,7 +19,6 @@ import React, { useEffect, useState } from "react";
 import About from "./components/About";
 import Chill from "./components/Chill";
 import Contact from "./components/Contact";
-import Home from "./components/Home";
 import CodeContainer from "./components/Other/CodeContainer";
 import Footer from "./components/Other/Footer";
 import Header from "./components/Other/Header";
@@ -191,7 +190,7 @@ function App() {
                 }}
               >
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<About />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/chill" element={<Chill />} />
