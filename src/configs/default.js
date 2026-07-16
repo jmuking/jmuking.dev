@@ -6,7 +6,6 @@ import alwaysJpg from "../resources/always.jpg";
 import clarkJpg from "../resources/clark.jpg";
 import coffeeJpg from "../resources/coffee.jpg";
 import pirateJpg from "../resources/pirate.jpg";
-import { getClientEnv } from "./env";
 
 export const photos = [
   { src: bikeJpg },
@@ -76,9 +75,9 @@ export const colors = {
 export const font = "JetBrains Mono";
 
 export const emailjsSettings = {
-  serviceId: getClientEnv("EMAILJS_SERVICE_ID"),
-  templateId: getClientEnv("EMAILJS_TEMPLATE_ID"),
-  userId: getClientEnv("EMAILJS_USER_ID"),
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  userId: import.meta.env.VITE_EMAILJS_USER_ID,
 };
 
 export const sploderMaps = [

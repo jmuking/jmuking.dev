@@ -7,25 +7,6 @@ import App from "./App";
 import "./index.css";
 import theme from "./theme";
 
-async function loadNetlifyEnv() {
-  if (typeof window === "undefined" || window.__NETLIFY_ENV__) {
-    return;
-  }
-
-  try {
-    const response = await fetch("/.netlify/functions/client-env");
-    if (!response.ok) {
-      return;
-    }
-
-    window.__NETLIFY_ENV__ = await response.json();
-  } catch {
-    window.__NETLIFY_ENV__ = {};
-  }
-}
-
-await loadNetlifyEnv();
-
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

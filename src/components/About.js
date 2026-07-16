@@ -53,10 +53,11 @@ function About() {
               flex: 1,
             }}
           >
-            I am a software engineer who works mainly on the front end. A lot
-            of my work is focused on application and product development. The
-            languages that I spend the most time in are: <b>React and Python.</b>{" "}
-            I am currently working as a <b>Sr. Software Engineer</b> at{" "}
+            I am a software engineer who works mainly on the front end. A lot of
+            my work is focused on application and product development. The
+            languages that I spend the most time in are:{" "}
+            <b>React and Python.</b> I am currently working as a{" "}
+            <b>Sr. Software Engineer</b> at{" "}
             <a href="https://target.com">
               <b>Target</b>
             </a>
@@ -88,6 +89,7 @@ function About() {
         {photos.map((photo, index) => {
           return (
             <Box
+              key={index}
               component="img"
               src={photo.src}
               alt={`${index}`}
